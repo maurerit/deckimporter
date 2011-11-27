@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://xml.mage.org/MageData"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://xml.mage.org/MageData"
+	jaxb:version="1.0"
+    jaxb:extensionBindingPrefixes="xjc"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	elementFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:globalBindings>
+				<xjc:simple />
+			</jaxb:globalBindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:element name="gameState" type="tns:GameState" />
+	<xsd:element name="game" type="tns:Game" />
+	<xsd:element name="response" type="tns:Response" />
+
+	<xsd:complexType name="Response">
+		<xsd:choice>
+			<xsd:element name="gameCreated" type="tns:GameCreateResponse" />
+			<xsd:element name="stateCreated" type="tns:GameStateCreateResponse" />
+			<xsd:element name="actions" type="tns:Action" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:choice>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Action">
+		<xsd:sequence>
+		
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Game">
+		<xsd:sequence>
+			<xsd:element name="player" type="tns:Player" maxOccurs="unbounded" minOccurs="2" />
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="GameCreateResponse">
+		<xsd:attribute name="value" type="xsd:boolean" />
+	</xsd:complexType>
+
+	<xsd:complexType name="GameState">
+		<xsd:sequence>
+			<xsd:element name="player" type="tns:Player" maxOccurs="unbounded" minOccurs="0" />
+			<xsd:element name="turn" type="tns:Turn" />
+			<xsd:element name="spellStack" type="tns:Stack" />
+			<xsd:element name="command" type="tns:Command" />
+			<xsd:element name="exile" type="tns:Exile" />
+			<xsd:element name="battlefield" type="tns:Battlefield" />
+		</xsd:sequence>
+		<xsd:attribute name="activePlayer" type="xsd:IDREF" />
+		<xsd:attribute name="priorityPlayer" type="xsd:IDREF" />
+		<xsd:attribute name="turnNumber" type="xsd:int" />
+		<xsd:attribute name="gameId" type="xsd:string" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="GameStateCreateResponse">
+		<xsd:attribute name="value" type="xsd:boolean" />
+	</xsd:complexType>
+
+	<!-- Private Zones -->
+	<xsd:complexType name="Library">
+		<xsd:sequence>
+			<xsd:element name="card" type="tns:Card" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Graveyard">
+		<xsd:sequence>
+			<xsd:element name="card" type="tns:Card" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Hand">
+		<xsd:sequence>
+			<xsd:element name="card" type="tns:Card" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Public Zones -->
+	<xsd:complexType name="Battlefield">
+		<xsd:sequence>
+			<xsd:element name="card" type="tns:OwnedCard" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Command">
+		<xsd:sequence>
+			<xsd:element name="card" type="tns:OwnedCard" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Stack">
+		<xsd:sequence>
+			<xsd:element name="ability" type="tns:Ability" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Exile">
+		<xsd:sequence>
+			<xsd:element name="card" type="tns:OwnedCard" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Game Objects -->
+	<xsd:complexType name="Player">
+		<xsd:sequence>
+			<xsd:element name="isHuman" type="xsd:boolean" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="library" type="tns:Library" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="graveyard" type="tns:Graveyard" />
+			<xsd:element name="hand" type="tns:Hand" />
+			<xsd:element name="counters" type="tns:CounterList" />
+			<xsd:element name="life" type="xsd:int" />
+			<xsd:element name="maxHandSize" type="xsd:int" />
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Card">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="superTypes" type="tns:StringList" minOccurs="0"/>
+			<xsd:element name="cardTypes" type="tns:CardTypeList" minOccurs="0"/>
+			<xsd:element name="subTypes" type="tns:StringList" minOccurs="0"/>
+			<xsd:element name="colors" type="tns:ObjectColorList" minOccurs="0"/>
+			<xsd:element name="manaCost" type="tns:ObjectColorList" minOccurs="0"/>
+			<xsd:element name="power" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="toughness" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="cardNumber" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="rarity" type="tns:Rarity" minOccurs="0"/>
+			<xsd:element name="expansionSetCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="faceDown" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="nightCard" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="ability" type="tns:Ability" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="OwnedCard">
+		<xsd:complexContent>
+			<xsd:extension base="tns:Card">
+				<xsd:attribute name="playerId" type="xsd:IDREF" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Ability">
+		<xsd:sequence>
+			<xsd:element name="abilityType" type="tns:AbilityType" />
+			<xsd:element name="rule" type="xsd:string" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="controller" type="xsd:IDREF" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Counter">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="count" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CounterList">
+		<xsd:sequence>
+			<xsd:element name="counter" type="tns:Counter" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Turn">
+		<xsd:sequence>
+			<xsd:element name="turnPhase" type="tns:TurnPhase" />
+			<xsd:element name="step" type="tns:PhaseStep" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="Rarity">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NA" />
+			<xsd:enumeration value="LAND" />
+			<xsd:enumeration value="COMMON" />
+			<xsd:enumeration value="UNCOMMON" />
+			<xsd:enumeration value="RARE" />
+			<xsd:enumeration value="MYTHIC" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="CardType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Artifact" />
+			<xsd:enumeration value="Creature" />
+			<xsd:enumeration value="Enchantment" />
+			<xsd:enumeration value="Instant" />
+			<xsd:enumeration value="Land" />
+			<xsd:enumeration value="Planeswalker" />
+			<xsd:enumeration value="Sorcery" />
+			<xsd:enumeration value="Tribal" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="ObjectColor">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="W" />
+			<xsd:enumeration value="U" />
+			<xsd:enumeration value="B" />
+			<xsd:enumeration value="R" />
+			<xsd:enumeration value="G" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="AbilityType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Play Land" />
+			<xsd:enumeration value="Mana" />
+			<xsd:enumeration value="Spell" />
+			<xsd:enumeration value="Activated" />
+			<xsd:enumeration value="Static" />
+			<xsd:enumeration value="Triggered" />
+			<xsd:enumeration value="Evasion" />
+			<xsd:enumeration value="Loyalty" />
+			<xsd:enumeration value="Special Action" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="StringList">
+		<xsd:list itemType="xsd:string" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="CardTypeList">
+		<xsd:list itemType="tns:CardType" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="ObjectColorList">
+		<xsd:list itemType="tns:ObjectColor" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="TurnPhase">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Beginning" />
+			<xsd:enumeration value="Precombat Main" />
+			<xsd:enumeration value="Combat" />
+			<xsd:enumeration value="Postcombat Main" />
+			<xsd:enumeration value="End" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="PhaseStep">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Untap" />
+			<xsd:enumeration value="Upkeep" />
+			<xsd:enumeration value="Draw" />
+			<xsd:enumeration value="Precombat Main" />
+			<xsd:enumeration value="Begin Combat" />
+			<xsd:enumeration value="Declare Attackers" />
+			<xsd:enumeration value="Declare Blockers" />
+			<xsd:enumeration value="First Combat Damage" />
+			<xsd:enumeration value="Combat Damage" />
+			<xsd:enumeration value="End Combat" />
+			<xsd:enumeration value="Postcombat Main" />
+			<xsd:enumeration value="End Turn" />
+			<xsd:enumeration value="Cleanup" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:element name="library" type="tns:Library" />
+</xsd:schema>
