@@ -9,6 +9,9 @@
 
 	<properties>
 		<javax.xml.bind-version>2.2.2</javax.xml.bind-version>
+		<org.slf4j-version>1.6.1</org.slf4j-version>
+		<log4j-version>1.2.16</log4j-version>
+		<validation-version>0.0.1-SNAPSHOT</validation-version>
 		
 		<junit-version>4.5</junit-version>
 		<metainf-services-version>1.1</metainf-services-version>
@@ -19,6 +22,31 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.6.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.maurerit</groupId>
+			<artifactId>validation</artifactId>
+			<version>${validation-version}</version>
+		</dependency>
+		
+		<!-- Logging related dependencies -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j-version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- JAXB XML Processor -->

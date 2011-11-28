@@ -16,7 +16,10 @@
  */
 package net.maurerit.mtg;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import net.maurerit.validation.MultiParameterException;
+import net.maurerit.validation.ParameterException;
 
 import org.junit.Test;
 
@@ -35,4 +38,30 @@ public class DeckImporterFactoryTest {
 		assertTrue("DeckImporter should be an instance of MtgVaultDeckImporter instead recieved: [" + importer + "].", importer instanceof MtgVaultDeckImporter);
 	}
 
+	@Test
+	public void shouldThrowParameterExceptionNullParams ( ) {
+		try {
+			DeckImporterFactory.createDeckImporter(null);
+			fail("Should have thrown a ParameterException");
+		}
+		catch ( ParameterException e ) { /* Good test case */ }
+	}
+	
+	@Test
+	public void shouldThrowParameterExceptionNullSaver ( ) {
+		try {
+			DeckImporterFactory.createDeckImporter(new ImporterParams("", ""), null);
+			fail("Should have thrown a ParameterException");
+		}
+		catch ( ParameterException e ) { /* Good test case */ }
+	}
+	
+	@Test
+	public void shouldThrowMultiParameterException ( ) {
+		try {
+			DeckImporterFactory.createDeckImporter(null, null);
+			fail("Should have thrown a MultiParameterException.");
+		}
+		catch ( MultiParameterException e ) { /* Good test case */ }
+	}
 }

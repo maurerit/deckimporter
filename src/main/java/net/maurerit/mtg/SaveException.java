@@ -16,20 +16,17 @@
  */
 package net.maurerit.mtg;
 
-import org.mage.shared.xml.Deck;
-
 /**
- * TODO: Javadoc Me.
+ * Defines an exception thrown while attempting to save a {@link Library}
+ * from an attempted import.
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
  */
-public interface DeckImporter
+public class SaveException extends Exception
 {
-	ImporterParams importerFor ( );
+	private static final long serialVersionUID = 6814335021137728721L;
 	
-	void setDeckSaver ( DeckSaver saver );
-	
-	DeckSaver getDeckSaver ( );
-	
-	Deck importDeck ( String url );
+	public SaveException ( String message, Throwable cause ) {
+		super(message, cause);
+	}
 }

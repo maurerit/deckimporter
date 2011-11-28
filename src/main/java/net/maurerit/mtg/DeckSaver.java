@@ -16,20 +16,32 @@
  */
 package net.maurerit.mtg;
 
+import java.io.IOException;
+import java.net.URL;
+
 import org.mage.shared.xml.Deck;
+import org.mage.shared.xml.Library;
 
 /**
- * TODO: Javadoc Me.
+ * This interface defines the methods to save an imported {@link Library}
+ * to locations specified by {@link URL}'s.
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
  */
-public interface DeckImporter
+public interface DeckSaver
 {
-	ImporterParams importerFor ( );
+	/**
+	 * Given a {@link URL} and a {@link Library} implementations of this
+	 * interface must attempt to save the <code>library</code> to the given
+	 * <code>url</code>
+	 * 
+	 * @param url
+	 * @param library
+	 * @return True or false if the save succeeded
+	 * @throws IOException if the save operation fails.
+	 */
+	void save ( URL url, Deck library ) throws SaveException;
 	
-	void setDeckSaver ( DeckSaver saver );
-	
-	DeckSaver getDeckSaver ( );
-	
-	Deck importDeck ( String url );
+	/* TODO: Implement me later */
+//	void save ( URL url, Deck library, DeckFormat format );
 }

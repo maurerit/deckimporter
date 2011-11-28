@@ -18,6 +18,11 @@ package net.maurerit.mtg;
 
 import java.util.ServiceLoader;
 
+import net.maurerit.validation.Validation;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * TODO: Javadoc Me.
  *
@@ -25,7 +30,13 @@ import java.util.ServiceLoader;
  */
 public class DeckImporterFactory
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(DeckImporterFactory.class);
+	
 	public static DeckImporter createDeckImporter ( ImporterParams params ) {
+		Validation.begin()
+		          .notNull(params, "params")
+		          .check();
+		
 		DeckImporter importer = null;
 		ServiceLoader<DeckImporter> deckImporters = ServiceLoader.load(DeckImporter.class);
 		
@@ -36,6 +47,25 @@ public class DeckImporterFactory
 					importer = foundImporter;
 				}
 			}
+		}
+		
+		return importer;
+	}
+	
+	public static DeckImporter createDeckImporter ( ImporterParams params, Class<? extends DeckSaver> saverClass ) {
+		Validation.begin()
+		          .notNull(params, "params")
+		          .notNull(saverClass, "saverClass")
+		          .check();
+		
+		DeckImporter importer = createDeckImporter(params);
+		
+		try {
+			importer.setDeckSaver(saverClass.newInstance());
+		} catch (InstantiationException e) {
+			LOGGER.error("Could not instantiate DeckSaver [" + saverClass.getName() + "]", e);
+		} catch (IllegalAccessException e) {
+			LOGGER.error("Default constructor does not exist for DeckSaver [" + saverClass.getName() + "]", e);
 		}
 		
 		return importer;
