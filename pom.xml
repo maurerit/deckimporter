@@ -55,13 +55,6 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>${javax.xml.bind-version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.kohsuke.metainf-services</groupId>
-			<artifactId>metainf-services</artifactId>
-			<version>${metainf-services-version}</version>
-			<optional>true</optional>
-		</dependency>
 		
 		<dependency>
 			<groupId>junit</groupId>

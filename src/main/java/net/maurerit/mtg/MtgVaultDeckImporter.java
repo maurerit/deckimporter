@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.kohsuke.MetaInfServices;
 import org.mage.shared.xml.Card;
 import org.mage.shared.xml.Deck;
 import org.mage.shared.xml.MainBoard;
@@ -33,7 +32,6 @@ import org.mage.shared.xml.SideBoard;
  *
  * @author Georgi Koshov koshov_at_gmail.com
  */
-@MetaInfServices(DeckImporter.class)
 public class MtgVaultDeckImporter implements DeckImporter {
 	
 	private DeckSaver saver = new MageFileDeckSaver();

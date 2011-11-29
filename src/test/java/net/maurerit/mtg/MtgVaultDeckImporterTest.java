@@ -100,15 +100,14 @@ public class MtgVaultDeckImporterTest
 	}
 
 	@Test
-	public void shouldImportMtgVaultDeckId257678 ( ) {
+	public void shouldImportMtgVaultDeckId265945 ( ) {
 		//TODO: This test may fail eventually if the owner of this deck ever changes it...
 		String actual = null;
 		
 		DeckImporter importer = DeckImporterFactory.createDeckImporter(new ImporterParams("http", "mtgvault.com"));
-		Deck importedDeck = importer.importDeck("http://www.mtgvault.com/ViewDeck.aspx?DeckID=257678");
+		Deck importedDeck = importer.importDeck("http://www.mtgvault.com/ViewDeck.aspx?DeckID=265945");
 		actual = (String)this.invokeMethod(new MageFileDeckSaver(), "formatDeck", new Class<?>[] { Deck.class }, importedDeck);
 		
-//		assertEquals(expected, actual);
 		assertTrue("Should have '4 [M12:219] Swiftfoot Boots'", actual.contains("4 [M12:219] Swiftfoot Boots"));
 		assertTrue("Should have '4 [MBS:14] Mirran Crusader'", actual.contains("4 [MBS:14] Mirran Crusader"));
 		assertTrue("Should have '2 [M12:63] Mana Leak'", actual.contains("2 [M12:63] Mana Leak"));
