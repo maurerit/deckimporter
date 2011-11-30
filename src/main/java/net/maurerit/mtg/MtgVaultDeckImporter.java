@@ -17,8 +17,6 @@
 package net.maurerit.mtg;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -36,21 +34,37 @@ public class MtgVaultDeckImporter implements DeckImporter {
 	
 	private DeckSaver saver = new MageFileDeckSaver();
 	
+	/*
+	 * (non-Javadoc)
+	 * @see net.maurerit.mtg.DeckImporter#importerFor()
+	 */
 	@Override
 	public ImporterParams importerFor ( ) {
 		return new ImporterParams("http", "mtgvault.com");
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see net.maurerit.mtg.DeckImporter#setDeckSaver(net.maurerit.mtg.DeckSaver)
+	 */
 	@Override
 	public void setDeckSaver ( DeckSaver saver ) {
 		this.saver = saver;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see net.maurerit.mtg.DeckImporter#getDeckSaver()
+	 */
 	@Override
 	public DeckSaver getDeckSaver ( ) {
 		return this.saver;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see net.maurerit.mtg.DeckImporter#importDeck(java.lang.String)
+	 */
 	@Override
 	public Deck importDeck ( String url ) {
 		Deck importedDeck = new Deck();
@@ -112,95 +126,6 @@ public class MtgVaultDeckImporter implements DeckImporter {
 		
 		return importedDeck;
 	}
-	
-    public static String validate(String link) {
-        if (isURL(link)){
-            if (link.contains("mtgvault.com")){
-                return "valid";
-            }else {
-                return "src";
-            }
-        }else {
-            return "url";
-        }
-    }
-    
-    private static boolean isURL(String s) {
-        String regex = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-        try {
-            Pattern patt = Pattern.compile(regex);
-            Matcher matcher = patt.matcher(s);
-            return matcher.matches();
-        } catch (RuntimeException e) {
-        return false;
-        }
-    }
-
-//    public static File getDeck(String deckLink) {
-//        try {
-//            // Create temp file.
-//            File temp = File.createTempFile("generatedDeck", ".dck");
-//
-//            // Delete temp file when program exits.
-//            temp.deleteOnExit();
-//
-//            // Write to temp file
-//            BufferedWriter out = new BufferedWriter(new FileWriter(temp));
-//            out.write(htmlParser(deckLink));
-//            out.close();
-//            return temp;
-//        } catch (IOException e) {
-//            return null;
-//        }
-//    }
-    
-//    private static String htmlParser(String link) {
-//        
-//        String output = "";
-//        
-//        try {
-//            Document doc = Jsoup.connect(link).get();
-//            Elements card = doc.select("td[class$=card]");
-//            for (int i = 0; i < card.size(); i++) {
-//                String curLine = "";
-//                String cardData = card.get(i).text(); //of the form "1x Card Name"
-//                String cardLink = "http://www.mtgvault.com/" + card.get(i).select("a").first().attr("href");
-//                
-//                if (cardData != null && !cardData.isEmpty()) {
-//                    curLine = cardData.substring(0, cardData.indexOf("x")) //first character of the string is the number of occurrences
-//                              + getCardCode(cardLink) //given a link returns string of the form: [ABC:123], corresponding to edition and card number
-//                              + cardData.substring(cardData.indexOf("x") + 1) //the remaining part of the string is the name of the card
-//                              + "\n";
-//                } else {
-//                    System.out.println("No card data at index " + i);
-//                }
-//                
-//                output += curLine;
-//            }
-//        } catch (IOException ex) {
-//            System.out.println("Exception when parsing the MTGVault deck page: " + ex.getMessage());
-//        }
-//        
-//        System.out.println(output);
-//        return output;
-//    }
-    
-//    private static String getCardCode(String link) {
-//        String output = "";
-//        try {
-//            int editionInd = link.indexOf("Edition=") + 8; //starting index of the edition key in the URL
-//            Document doc = Jsoup.connect(link.replace(" ", "%20")).get();
-//            output = " [" 
-//                     + link.substring(editionInd, editionInd + 3)
-//                     + ":"
-//                     + getCardNumber( doc.select("td[class$=cardinfo]").get(8).text() )
-//                     + "]";
-//            
-//        }catch (IOException ex) {
-//            System.out.println("Exception when parsing the MTGVault card page: " + ex.getMessage());
-//        }
-//        return output;
-//    }
     
     private Integer getCardNumber(String s) {
         int from = s.indexOf("Number: ") + 8;

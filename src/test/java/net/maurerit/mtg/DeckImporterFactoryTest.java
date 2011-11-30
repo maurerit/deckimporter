@@ -18,6 +18,9 @@ package net.maurerit.mtg;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.net.URL;
+
 import net.maurerit.validation.MultiParameterException;
 import net.maurerit.validation.ParameterException;
 
@@ -39,9 +42,18 @@ public class DeckImporterFactoryTest {
 	}
 
 	@Test
+	public void shouldThrowParameterExceptionNullUrl ( ) {
+		try {
+			DeckImporterFactory.createDeckImporter((URL)null);
+			fail("Should have thrown a ParameterException");
+		}
+		catch ( ParameterException e ) { /* Good test case */ }
+	}
+	
+	@Test
 	public void shouldThrowParameterExceptionNullParams ( ) {
 		try {
-			DeckImporterFactory.createDeckImporter(null);
+			DeckImporterFactory.createDeckImporter((ImporterParams)null);
 			fail("Should have thrown a ParameterException");
 		}
 		catch ( ParameterException e ) { /* Good test case */ }

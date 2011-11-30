@@ -16,7 +16,6 @@
  */
 package net.maurerit.mtg;
 
-import java.io.IOException;
 import java.net.URL;
 
 import org.mage.shared.xml.Deck;
@@ -38,7 +37,7 @@ public interface DeckSaver
 	 * @param url
 	 * @param library
 	 * @return True or false if the save succeeded
-	 * @throws IOException if the save operation fails.
+	 * @throws SaveException if the save operation fails.
 	 */
 	void save ( URL url, Deck library ) throws SaveException;
 	

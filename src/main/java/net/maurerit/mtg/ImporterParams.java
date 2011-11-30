@@ -16,6 +16,8 @@
  */
 package net.maurerit.mtg;
 
+import net.maurerit.validation.Validation;
+
 /**
  * TODO: Javadoc Me.
  * 
@@ -43,6 +45,23 @@ public class ImporterParams {
 	 */
 	public String getPathContains() {
 		return pathContains;
+	}
+	
+	public boolean matches ( ImporterParams params ) {
+		Validation.begin()
+		          .notNull(params, "params")
+		          .notEmpty(params.getPathContains(), "params.pathContains")
+		          .notEmpty(params.getUrlType(), "params.urlType")
+		          .check();
+		boolean matches = false;
+		
+		if ( params.getPathContains().contains(this.pathContains) &&
+			 params.getUrlType().equalsIgnoreCase(this.urlType) )
+		{
+			matches = true;
+		}
+		
+		return matches;
 	}
 
 	/*

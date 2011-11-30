@@ -16,14 +16,16 @@
  */
 package net.maurerit.mtg;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.junit.Test;
 import org.mage.shared.xml.Card;
@@ -100,11 +102,11 @@ public class MtgVaultDeckImporterTest
 	}
 
 	@Test
-	public void shouldImportMtgVaultDeckId265945 ( ) {
+	public void shouldImportMtgVaultDeckId265945 ( ) throws MalformedURLException {
 		//TODO: This test may fail eventually if the owner of this deck ever changes it...
 		String actual = null;
 		
-		DeckImporter importer = DeckImporterFactory.createDeckImporter(new ImporterParams("http", "mtgvault.com"));
+		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL("http://www.mtgvault.com/ViewDeck.aspx?DeckID=265945"));
 		Deck importedDeck = importer.importDeck("http://www.mtgvault.com/ViewDeck.aspx?DeckID=265945");
 		actual = (String)this.invokeMethod(new MageFileDeckSaver(), "formatDeck", new Class<?>[] { Deck.class }, importedDeck);
 		
