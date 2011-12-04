@@ -18,12 +18,8 @@ package net.maurerit.mtg;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -34,35 +30,14 @@ import org.mage.shared.xml.MainBoard;
 import org.mage.shared.xml.SideBoard;
 
 /**
- * TODO: Javadoc me
+ * Runs tests to test the {@link MtgVaultDeckImporter}.
  *
- * @author MM66053
+ * @author Matthew L. Maurer maurer.it@gmail.com
  */
 public class MtgVaultDeckImporterTest
 {
-	public Object invokeMethod ( Object obj, String name, Class<?>[] parameterTypes, Object... args ) {
-		Method method;
-		try {
-			method = obj.getClass().getDeclaredMethod(name, parameterTypes);
-			method.setAccessible(true);
-			return method.invoke(obj, args);
-		} catch (SecurityException e) {
-			fail("SecurityException thrown:\n" + makeReadableStacktrace(e));
-		} catch (NoSuchMethodException e) {
-			fail("NoSuchMethodException thrown:\n" + makeReadableStacktrace(e));
-		} catch (IllegalArgumentException e) {
-			fail("IllegalArgumentException thrown:\n" + makeReadableStacktrace(e));
-		} catch (IllegalAccessException e) {
-			fail("IllegalAccessException thrown:\n" + makeReadableStacktrace(e));
-		} catch (InvocationTargetException e) {
-			fail("InvocationTargetException thrown:\n" + makeReadableStacktrace(e));
-		}
-		
-		return null;
-	}
-	
 	@Test
-	public void shouldFormat2MainBoardAnd2SideBoardCard ( ) {
+	public void shouldFormat2MainBoardAnd2SideBoardCard ( ) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		String expected = "NAME: DeckName" + System.getProperty("line.separator") +
 				          "1 [ZEN:249] Forest" + System.getProperty("line.separator") +
 				          "1 [SOM:116] Copperhorn Scout" + System.getProperty("line.separator") +
@@ -96,19 +71,18 @@ public class MtgVaultDeckImporterTest
 		deck.getSideBoard().getCards().add(blah);
 		
 		MageFileDeckSaver saver = new MageFileDeckSaver();
-		actual = (String)this.invokeMethod(saver, "formatDeck", new Class[] { Deck.class }, deck);
+		actual = TestDeckImporterUtils.invokeDeckSaversFormatMethod(saver, deck);
 		
 		assertEquals(expected, actual);
 	}
 
 	@Test
-	public void shouldImportMtgVaultDeckId265945 ( ) throws MalformedURLException {
-		//TODO: This test may fail eventually if the owner of this deck ever changes it...
+	public void shouldImportMtgVaultDeckId265945 ( ) throws MalformedURLException, SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		String actual = null;
 		
 		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL("http://www.mtgvault.com/ViewDeck.aspx?DeckID=265945"));
 		Deck importedDeck = importer.importDeck("http://www.mtgvault.com/ViewDeck.aspx?DeckID=265945");
-		actual = (String)this.invokeMethod(new MageFileDeckSaver(), "formatDeck", new Class<?>[] { Deck.class }, importedDeck);
+		actual = TestDeckImporterUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), importedDeck);
 		
 		assertTrue("Should have '4 [M12:219] Swiftfoot Boots'", actual.contains("4 [M12:219] Swiftfoot Boots"));
 		assertTrue("Should have '4 [MBS:14] Mirran Crusader'", actual.contains("4 [MBS:14] Mirran Crusader"));
@@ -133,11 +107,5 @@ public class MtgVaultDeckImporterTest
 		assertTrue("Should have 'SB: 2 [SOM:208] Sword of Body and Mind'", actual.contains("SB: 2 [SOM:208] Sword of Body and Mind"));
 		assertTrue("Should have 'SB: 1 [NPH:161] Sword of War and Peace'", actual.contains("SB: 1 [NPH:161] Sword of War and Peace"));
 		assertTrue("Should have 'SB: 2 [ROE:21] Gideon Jura'", actual.contains("SB: 2 [ROE:21] Gideon Jura"));
-	}
-	
-	private String makeReadableStacktrace ( Throwable throwable ) {
-		StringWriter writer = new StringWriter();
-		throwable.printStackTrace(new PrintWriter(writer));
-		return writer.toString();
 	}
 }
