@@ -50,6 +50,7 @@ public class TcgPlayerDeckImporter implements DeckImporter
 	private static final Pattern CARD_COUNT_PATTERN = Pattern.compile("\\n*(\\d+) ");
 	private static final Pattern SET_PATTERN = Pattern.compile(".*Edition=([A-Z0-9]{3})");
 	private static final String BASE_CARD_URL = "http://www.mtgvault.com/ViewCard.aspx?CardName={1}";
+	private static final int DECK_TAG_COUNT = 3;
 
 	@Override
 	public ImporterParams importerFor ( ) {
@@ -79,7 +80,7 @@ public class TcgPlayerDeckImporter implements DeckImporter
 			Validation.begin()
 					  .noGreaterThan(result.size(), 1, "result.size")
 					  .check()
-					  .noLessThan(result.get(0).childNodes().size(), 3, "result.childNodes.size")
+					  .noLessThan(result.get(0).childNodes().size(), DECK_TAG_COUNT, "result.childNodes.size")
 					  .check();
 			
 			Element cardTd = result.get(0);
@@ -106,7 +107,7 @@ public class TcgPlayerDeckImporter implements DeckImporter
 			}
 		}
 		catch ( IOException e ) {
-			throw new RuntimeException("IOException while parsing deck.", e);
+			throw new ImportException("IOException while parsing deck.", e);
 		}
 		
 		return importedDeck;
@@ -129,7 +130,7 @@ public class TcgPlayerDeckImporter implements DeckImporter
 		boolean startsCard = false;
 		
 		//Firstly check that we have at least 3 child nodes
-		if ( elements != null && !elements.isEmpty() && elements.size() >= 3 ) {
+		if ( elements != null && !elements.isEmpty() && elements.size() >= DECK_TAG_COUNT ) {
 			//The top three nodes should be of pattern:
 			//	TextNode - this contains the card count
 			//	a Element - a link to the card
@@ -166,7 +167,7 @@ public class TcgPlayerDeckImporter implements DeckImporter
 	
 	private List<Card> parseCard ( List<Node> nodes ) throws IOException {
 		Validation.begin()
-				  .noLessThan(nodes.size(), 3, "nodes.size")
+				  .noLessThan(nodes.size(), DECK_TAG_COUNT, "nodes.size")
 				  .check();
 		List<Card> cards = new ArrayList<Card>();
 		

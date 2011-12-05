@@ -80,7 +80,7 @@ public class MtgVaultDeckImporter implements DeckImporter {
                 String cardLink = "http://www.mtgvault.com/" + cards.get(i).select("a").first().attr("href");
                 
                 if (cardData != null && !cardData.isEmpty()) {
-                	int total = Integer.parseInt(cardData.substring(0, cardData.indexOf("x")));
+                	int total = Integer.parseInt(cardData.substring(0, cardData.indexOf('x')));
                 	
                 	int editionInd = cardLink.indexOf("Edition=") + 8; //starting index of the edition key in the URL
             		Document cardInfo = Jsoup.connect(cardLink.replace(" ", "%20")).get();
@@ -104,14 +104,14 @@ public class MtgVaultDeckImporter implements DeckImporter {
                 String cardLink = "http://www.mtgvault.com/" + cards.get(i).select("a").first().attr("href");
                 
                 if (cardData != null && !cardData.isEmpty()) {
-                	int total = Integer.parseInt(cardData.substring(0, cardData.indexOf("x")));
+                	int total = Integer.parseInt(cardData.substring(0, cardData.indexOf('x')));
                 	
                 	int editionInd = cardLink.indexOf("Edition=") + 8; //starting index of the edition key in the URL
             		Document cardInfo = Jsoup.connect(cardLink.replace(" ", "%20")).get();
                 	
                 	for ( int idx = 0; idx < total; idx++ ) {
                 		Card card = new Card();
-                		card.setName(cardData.substring(cardData.indexOf("x") + 2));
+                		card.setName(cardData.substring(cardData.indexOf('x') + 2));
                 		card.setCardNumber(getCardNumber(cardInfo.select("td.cardinfo").get(8).text()));
                 		card.setExpansionSetCode(cardLink.substring(editionInd, editionInd + 3));
                 		
@@ -121,7 +121,7 @@ public class MtgVaultDeckImporter implements DeckImporter {
 	        }
 		}
 		catch ( IOException e ) {
-			throw new RuntimeException("IOException while parsing deck.", e);
+			throw new ImportException("IOException while parsing deck.", e);
 		}
 		
 		return importedDeck;

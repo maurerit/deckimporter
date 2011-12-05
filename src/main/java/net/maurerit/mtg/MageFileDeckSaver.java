@@ -48,9 +48,10 @@ public class MageFileDeckSaver implements DeckSaver {
 		          .notNull(url, "url")
 		          .notNull(deck, "deck")
 		          .check();
+		BufferedWriter bw = null;
 		try {
 			File file = new File(url.toURI());
-			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+			bw = new BufferedWriter(new FileWriter(file));
 			bw.write(this.formatDeck(deck));
 			bw.close();
 		}
@@ -59,6 +60,15 @@ public class MageFileDeckSaver implements DeckSaver {
 		}
 		catch ( IOException e ) {
 			throw new SaveException("IOException encountered during save.", e);
+		}
+		finally {
+			if ( bw != null ) {
+				try {
+					bw.close();
+				} catch (IOException e) {
+					throw new SaveException("IOException encountered while closing the stream.", e);
+				}
+			}
 		}
 	}
 

@@ -28,7 +28,7 @@ import org.mage.shared.xml.Deck;
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
  */
-public class TestDeckImporterUtils {
+public class DeckImporterUtils {
 	public static String invokeDeckSaversFormatMethod ( MageFileDeckSaver obj, Deck deck ) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		Method method = obj.getClass().getDeclaredMethod("formatDeck", new Class[] { Deck.class });
 		method.setAccessible(true);

@@ -94,7 +94,7 @@ public class TcgPlayerDeckImporterTest
 		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL(url));
 		
 		Deck deck = importer.importDeck(url);
-		String actual = TestDeckImporterUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), deck);
+		String actual = DeckImporterUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), deck);
 		
 		assertTrue("Should have '1 [M12:165] Birds of Paradise'", actual.contains("1 [M12:165] Birds of Paradise"));
 		assertTrue("Should have '4 [M12:147] Inferno Titan'", actual.contains("4 [M12:147] Inferno Titan"));

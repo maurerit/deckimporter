@@ -33,6 +33,8 @@ public class DeckImporterFactory
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeckImporterFactory.class);
 	
+	private DeckImporterFactory ( ) { }
+	
 	/**
 	 * Creates a {@link DeckImporter} that can import decks from the given {@link URL}
 	 * 
@@ -67,10 +69,8 @@ public class DeckImporterFactory
 		
 		for ( DeckImporter foundImporter : deckImporters ) {
 			ImporterParams importerParams = foundImporter.importerFor();
-			if ( importerParams != null ) {
-				if ( importerParams.matches(params) ) {
-					importer = foundImporter;
-				}
+			if ( importerParams != null && importerParams.matches(params)) {
+				importer = foundImporter;
 			}
 		}
 		

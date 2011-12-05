@@ -86,23 +86,32 @@ public class ImporterParams {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ImporterParams other = (ImporterParams) obj;
-		if (pathContains == null) {
-			if (other.pathContains != null)
-				return false;
-		} else if (!pathContains.contains(other.pathContains))
-			return false;
-		if (urlType == null) {
-			if (other.urlType != null)
-				return false;
-		} else if (!urlType.equalsIgnoreCase(other.urlType))
-			return false;
-		return true;
+		boolean isEqual = true;
+		if (this == obj) {
+			isEqual = true;
+		}
+		if (obj == null) {
+			isEqual = false;
+		}
+		if (getClass() != obj.getClass()) {
+			isEqual = false;
+		}
+		
+		if ( isEqual ) {
+			ImporterParams other = (ImporterParams) obj;
+			if ( pathContains == null && other.pathContains != null ) {
+				isEqual = false;
+			}
+			else if (!pathContains.contains(other.pathContains)) {
+				isEqual = false;
+			}
+			if ( urlType == null && other.urlType != null ) {
+				isEqual = false;
+			}
+			else if (!urlType.equalsIgnoreCase(other.urlType)) {
+				isEqual = false;
+			}
+		}
+		return isEqual;
 	}
 }

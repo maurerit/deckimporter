@@ -62,8 +62,9 @@ public interface DeckImporter
 	 * may reach out to the internet, to a database or just read data from a local
 	 * file system.
 	 * 
-	 * @param url
-	 * @return
+	 * @param url The {@link URL} of the deck that should be imported.
+	 * @return The imported {@link Deck} if everything went well.
+	 * @throws ImportException if an import failed miserably.
 	 */
 	Deck importDeck ( String url );
 }
