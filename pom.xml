@@ -11,7 +11,7 @@
 		<javax.xml.bind-version>2.2.2</javax.xml.bind-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
 		<log4j-version>1.2.16</log4j-version>
-		<validation-version>0.0.1-SNAPSHOT</validation-version>
+		<validation-version>0.0.2-SNAPSHOT</validation-version>
 		
 		<junit-version>4.5</junit-version>
 		<metainf-services-version>1.1</metainf-services-version>
