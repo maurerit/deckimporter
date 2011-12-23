@@ -7,12 +7,23 @@
 	<name>Web Deck Importer</name>
 	<description>A Simple library to import decks from online deck lists and tournaments or from deck building sites.</description>
 
+	<organization>
+		<name>Maurer IT</name>
+		<url>maurer-it.net</url>
+	</organization>
+
+	<scm>
+		<url>https://maurerit@github.com/maurerit/deckimporter.git</url>
+		<connection>git</connection>
+		<developerConnection>scm:git:[fetch=]https://github.com:maurerit/deckimporter.git[push=]ssh://git@github.com:maurerit/deckimporter.git</developerConnection>
+	</scm>
+
 	<properties>
 		<javax.xml.bind-version>2.2.2</javax.xml.bind-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
 		<log4j-version>1.2.16</log4j-version>
 		<validation-version>0.0.2-SNAPSHOT</validation-version>
-		
+
 		<junit-version>4.5</junit-version>
 		<metainf-services-version>1.1</metainf-services-version>
 	</properties>
@@ -23,13 +34,13 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.maurerit</groupId>
 			<artifactId>validation</artifactId>
 			<version>${validation-version}</version>
 		</dependency>
-		
+
 		<!-- Logging related dependencies -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -55,7 +66,7 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>${javax.xml.bind-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit-dep</artifactId>
@@ -77,6 +88,7 @@
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.7.5</version>
 				<executions>
 					<execution>
 						<goals>
@@ -88,6 +100,14 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<connectionType>developerConnection</connectionType>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
