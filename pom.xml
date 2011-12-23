@@ -15,7 +15,7 @@
 	<scm>
 		<url>scm:git:[fetch=]https://maurerit@github.com/maurerit/deckimporter.git</url>
 		<connection>scm:git:[fetch=]https://maurerit@github.com/maurerit/deckimporter.git</connection>
-		<developerConnection>scm:git:[fetch=]https://github.com:maurerit/deckimporter.git[push=]ssh://git@github.com:maurerit/deckimporter.git</developerConnection>
+		<developerConnection>scm:git:[fetch=]https://github.com:maurerit/deckimporter.git[push=]origin</developerConnection>
 	</scm>
 
 	<properties>
