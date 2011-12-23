@@ -20,6 +20,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.AbstractMap;
@@ -40,7 +41,7 @@ public class MageFileDeckSaver implements DeckSaver {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.maurerit.mtg.DeckSaver#save(java.net.URL, org.mage.shared.xml.Library)
+	 * @see net.maurerit.mtg.DeckSaver#save(java.net.URL, org.mage.shared.xml.Deck)
 	 */
 	@Override
 	public void save ( URL url, Deck deck ) throws SaveException {
@@ -71,7 +72,27 @@ public class MageFileDeckSaver implements DeckSaver {
 			}
 		}
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see net.maurerit.mtg.DeckSaver#save(java.io.File, org.mage.shared.xml.Deck)
+	 */
+	@Override
+	public void save ( File file, Deck deck ) throws SaveException {
+		try {
+			this.save(file.toURI().toURL(), deck);
+		} catch (MalformedURLException e) {
+			throw new SaveException("Could not find valid URL from file parameter.", e);
+		}
+	}
 
+	/**
+	 * Transforms the given {@link Deck} into the
+	 * <a href="http://code.google.com/p/mage">Mage</a> mwdeck format.
+	 * 
+	 * @param deck
+	 * @return
+	 */
 	private String formatDeck ( Deck deck ) {
 		Validation.begin()
 		          .notNull(deck.getMainBoard(), "deck.mainBoard")

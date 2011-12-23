@@ -17,8 +17,12 @@
 package net.maurerit.mtg;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ServiceLoader;
 
+import net.maurerit.validation.MultiParameterException;
+import net.maurerit.validation.ParameterException;
 import net.maurerit.validation.Validation;
 
 import org.slf4j.Logger;
@@ -34,6 +38,18 @@ public class DeckImporterFactory
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeckImporterFactory.class);
 	
 	private DeckImporterFactory ( ) { }
+	
+	public static List<ImporterParams> availableImporters ( ) {
+		List<ImporterParams> params = new ArrayList<ImporterParams>();
+		
+		ServiceLoader<DeckImporter> deckImporters = ServiceLoader.load(DeckImporter.class);
+		
+		for ( DeckImporter deckImporter : deckImporters ) {
+			params.add(deckImporter.importerFor());
+		}
+		
+		return params;
+	}
 	
 	/**
 	 * Creates a {@link DeckImporter} that can import decks from the given {@link URL}

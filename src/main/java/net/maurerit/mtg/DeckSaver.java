@@ -16,9 +16,11 @@
  */
 package net.maurerit.mtg;
 
+import java.io.File;
 import java.net.URL;
 
 import org.mage.shared.xml.Deck;
+import org.mage.shared.xml.Library;
 
 /**
  * This interface defines the methods to save an imported {@link Library}
@@ -29,16 +31,27 @@ import org.mage.shared.xml.Deck;
 public interface DeckSaver
 {
 	/**
-	 * Given a {@link URL} and a {@link Library} implementations of this
-	 * interface must attempt to save the <code>library</code> to the given
-	 * <code>url</code>
+	 * Given a {@link URL} and a {@link Deck} implementations of this
+	 * interface must attempt to save the <code>deck</code> to the given
+	 * <code>url</code>.
 	 * 
 	 * @param url
-	 * @param library
+	 * @param deck
 	 * @return True or false if the save succeeded
 	 * @throws SaveException if the save operation fails.
 	 */
-	void save ( URL url, Deck library ) throws SaveException;
+	void save ( URL url, Deck deck ) throws SaveException;
+	
+	/**
+	 * Given a {@link File} and a {@link Deck} implementations of this
+	 * interface must attempt to save the <code>deck</code> to the given
+	 * <code>file</code>.
+	 * 
+	 * @param file
+	 * @param deck
+	 * @throws SaveException
+	 */
+	void save ( File file, Deck deck ) throws SaveException;
 	
 	/* TODO: Implement me later */
 //	void save ( URL url, Deck library, DeckFormat format );

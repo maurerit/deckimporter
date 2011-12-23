@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.maurerit.mtg</groupId>
 	<artifactId>deckimporter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Web Deck Importer</name>
 	<description>A Simple library to import decks from online deck lists and tournaments or from deck building sites.</description>
 

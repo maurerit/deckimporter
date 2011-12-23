@@ -16,10 +16,13 @@
  */
 package net.maurerit.mtg;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.maurerit.validation.MultiParameterException;
 import net.maurerit.validation.ParameterException;
@@ -75,5 +78,28 @@ public class DeckImporterFactoryTest {
 			fail("Should have thrown a MultiParameterException.");
 		}
 		catch ( MultiParameterException e ) { /* Good test case */ }
+	}
+	
+	@Test
+	public void shouldFindAvaliableDeckImporterParams ( ) {
+		List<ImporterParams> params = DeckImporterFactory.availableImporters();
+		List<String> expectedParamHosts = new ArrayList<String>();
+		expectedParamHosts.add("mtgvault.com");
+		expectedParamHosts.add("magic.tcgplayer.com");
+		
+		assertEquals(2, params.size());
+		
+		int matchesFound = 0;
+		
+		for ( String importerHost : expectedParamHosts ) {
+			for ( ImporterParams param : params ) {
+				if ( param.getPathContains().equalsIgnoreCase(importerHost) ) {
+					matchesFound++;
+				}
+			}
+		}
+		
+		
+		assertEquals("Not all expected importers were found.", 2, matchesFound);
 	}
 }
