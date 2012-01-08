@@ -71,7 +71,7 @@ public class MtgVaultDeckImporterTest
 		deck.getSideBoard().getCards().add(blah);
 		
 		MageFileDeckSaver saver = new MageFileDeckSaver();
-		actual = DeckImporterUtils.invokeDeckSaversFormatMethod(saver, deck);
+		actual = DeckImporterTestUtils.invokeDeckSaversFormatMethod(saver, deck);
 		
 		assertEquals(expected, actual);
 	}
@@ -82,7 +82,7 @@ public class MtgVaultDeckImporterTest
 		
 		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL("http://www.mtgvault.com/ViewDeck.aspx?DeckID=265945"));
 		Deck importedDeck = importer.importDeck("http://www.mtgvault.com/ViewDeck.aspx?DeckID=265945");
-		actual = DeckImporterUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), importedDeck);
+		actual = DeckImporterTestUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), importedDeck);
 		
 		assertTrue("Should have '4 [M12:219] Swiftfoot Boots'", actual.contains("4 [M12:219] Swiftfoot Boots"));
 		assertTrue("Should have '4 [MBS:14] Mirran Crusader'", actual.contains("4 [MBS:14] Mirran Crusader"));

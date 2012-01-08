@@ -96,6 +96,13 @@
 						</goals>
 						<!-- http://confluence.highsource.org/display/MJIIP/User+Guide -->
 						<configuration>
+							<plugins>
+								<plugin>
+									<groupId>org.jvnet.jaxb2_commons</groupId>
+									<artifactId>jaxb2-basics-annotate</artifactId>
+									<version>0.6.3</version>
+								</plugin>
+							</plugins>
 							<extension>true</extension>
 						</configuration>
 					</execution>

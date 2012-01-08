@@ -67,4 +67,16 @@ public interface DeckImporter
 	 * @throws ImportException if an import failed miserably.
 	 */
 	Deck importDeck ( String url );
+	
+	/**
+	 * Some importers may have the need to have some options specified before they
+	 * begin importing a single deck.  For instance there may be 'repositories' that
+	 * don't single decks at a given URL buy many, so one may need to specify which
+	 * deck to import from the specified URL.
+	 * 
+	 * @param url The {@link URL} of the deck that should be imported.
+	 * @param options 
+	 * @return
+	 */
+	Deck importDeck ( String url, ImporterOptions options );
 }

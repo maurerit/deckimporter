@@ -16,14 +16,11 @@
  */
 package net.maurerit.mtg;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.junit.Test;
 import org.mage.shared.xml.Deck;
@@ -45,56 +42,12 @@ public class TcgPlayerDeckImporterTest
 	}
 	
 	@Test
-	public void shouldParseSetsProperly ( ) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		Field field = TcgPlayerDeckImporter.class.getDeclaredField("SET_PATTERN");
-		field.setAccessible(true);
-		Pattern setPattern = (Pattern) field.get(new TcgPlayerDeckImporter());
-		
-		String[] tests = { "Edition=M12", "Edition=ISD", "Edition=WWK", "ViewCard.aspx?CardName=Thrun,+the+Last+Troll&Edition=MBS" };
-		String[] expecteds = { "M12", "ISD", "WWK", "MBS" };
-		
-		for ( int idx = 0; idx < tests.length; idx++ ) {
-			Matcher matcher = setPattern.matcher(tests[idx]);
-			if ( matcher.matches() ) {
-				String actual = matcher.group(1);
-				
-				assertEquals("Parsed set should match " + expecteds[idx], expecteds[idx], actual);
-			}
-			else {
-				fail("Index of tests: " + idx + " with value: " + tests[idx] + " did not match.");
-			}
-		}
-	}
-	
-	@Test
-	public void shouldParseCountsProperly ( ) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		Field field = TcgPlayerDeckImporter.class.getDeclaredField("CARD_COUNT_PATTERN");
-		field.setAccessible(true);
-		Pattern cardCountPattern = (Pattern) field.get(new TcgPlayerDeckImporter());
-		
-		String[] tests = { "1 ", "\n\n1 ", "12 ", "\n\n12 " };
-		Integer[] expecteds = { 1, 1, 12, 12 };
-		
-		for ( int idx = 0; idx < tests.length; idx++ ) {
-			Matcher matcher = cardCountPattern.matcher(tests[idx]);
-			
-			if ( matcher.matches() ) {
-				Integer parsedInt = Integer.parseInt(matcher.group(1));
-				assertEquals("Cound count should match " + expecteds[idx], expecteds[idx], parsedInt);
-			}
-			else {
-				fail("Index of tests: " + idx + " with value: " + tests[idx] + " did not match.");
-			}
-		}
-	}
-	
-	@Test
 	public void shouldImportDeck943886 ( ) throws MalformedURLException, SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		String url = "http://magic.tcgplayer.com/db/deck.asp?deck_id=943886";
 		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL(url));
 		
 		Deck deck = importer.importDeck(url);
-		String actual = DeckImporterUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), deck);
+		String actual = DeckImporterTestUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), deck);
 		
 		assertTrue("Should have '1 [M12:165] Birds of Paradise'", actual.contains("1 [M12:165] Birds of Paradise"));
 		assertTrue("Should have '4 [M12:147] Inferno Titan'", actual.contains("4 [M12:147] Inferno Titan"));

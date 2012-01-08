@@ -8,7 +8,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ DeckImporterFactoryTest.class,
 				MtgVaultDeckImporterTest.class,
 				TcgPlayerDeckImporterTest.class,
-				MageFileDeckSaverTest.class })
+				MageFileDeckSaverTest.class,
+				DeckImporterUtilsTest.class,
+				MagicOnlineDeckImporterTest.class })
 public class AllTests {
 
 }

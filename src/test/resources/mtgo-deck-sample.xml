@@ -1,0 +1,127 @@
+<div class="deck">
+	<div class="decktop">
+		<div class="decktopmiddle">
+			<div style="float:left">
+				<div class="main">
+					<heading>bejato (4-0)</heading>
+				</div>
+				<div class="sub">Standard Daily #3193365 on 01/01/2012</div>
+			</div>
+			<div class="deckoptions" style="display: none;">
+				<a target="_blank" href="/magic/samplehand.asp?x=mtg/digital/magiconline/tourn/3193365&amp;decknum=1">
+					<img src="/magic/assets/decklist/handIcon.png" border="0" alt="View a sample hand of this deck" align="right" />
+				</a>
+			</div>
+			<br class="clear" />
+		</div>
+	</div>
+	<div class="maindeck">
+		<div class="maindeckmiddle">
+			<div style="position: relative;">
+				<table class="cardgroup">
+					<tr>
+						<td align="center" colspan="2">
+							<p class="decktitle">Main Deck</p>
+							<p class="cardcount">60 cards
+									</p>
+						</td>
+						<td align="center" valign="top" style="width:230px" />
+					</tr>
+					<tr>
+						<td valign="top" width="185">21 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Mountain" onclick="autoCardWindow(this)" href="javascript:void()">Mountain</a>
+							<br />
+							<hr size="1" width="50%" align="left" class="decktotals" />
+							<span class="decktotals">21 lands</span>
+							<br />
+							<br />4 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Chandra[s_Phoenix" onclick="autoCardWindow(this)" href="javascript:void()">Chandra's Phoenix</a>
+							<br />2 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Goblin_Fireslinger" onclick="autoCardWindow(this)" href="javascript:void()">Goblin Fireslinger</a>
+							<br />2 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Grim_Lavamancer" onclick="autoCardWindow(this)" href="javascript:void()">Grim Lavamancer</a>
+							<br />4 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Reckless_Waif" onclick="autoCardWindow(this)" href="javascript:void()">Reckless Waif</a>
+							<br />4 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Stormblood_Berserker" onclick="autoCardWindow(this)" href="javascript:void()">Stormblood Berserker</a>
+							<br />4 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Stromkirk_Noble" onclick="autoCardWindow(this)" href="javascript:void()">Stromkirk Noble</a>
+							<br />
+							<hr size="1" width="50%" align="left" class="decktotals" />
+							<span class="decktotals">20 creatures</span>
+							<br />
+							<br />
+						</td>
+						<td valign="top" width="185">3 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Arc_Trail" onclick="autoCardWindow(this)" href="javascript:void()">Arc Trail</a>
+							<br />2 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Brimstone_Volley" onclick="autoCardWindow(this)" href="javascript:void()">Brimstone Volley</a>
+							<br />3 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Galvanic_Blast" onclick="autoCardWindow(this)" href="javascript:void()">Galvanic Blast</a>
+							<br />3 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Gut_Shot" onclick="autoCardWindow(this)" href="javascript:void()">Gut Shot</a>
+							<br />4 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Shrine_of_Burning_Rage" onclick="autoCardWindow(this)" href="javascript:void()">Shrine of Burning Rage</a>
+							<br />4 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Volt_Charge" onclick="autoCardWindow(this)" href="javascript:void()">Volt Charge</a>
+							<br />
+							<hr size="1" width="50%" align="left" class="decktotals" />
+							<span class="decktotals">19 other spells</span>
+							<br />
+							<br />
+							<div class="decktitle" style="padding-bottom:8px;">
+								<b>
+									<i>Sideboard</i>
+								</b>
+							</div>1 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Arc_Trail" onclick="autoCardWindow(this)" href="javascript:void()">Arc Trail</a>
+							<br />3 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Dragon[s_Claw" onclick="autoCardWindow(this)" href="javascript:void()">Dragon's Claw</a>
+							<br />2 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Manabarbs" onclick="autoCardWindow(this)" href="javascript:void()">Manabarbs</a>
+							<br />3 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Manic_Vandal" onclick="autoCardWindow(this)" href="javascript:void()">Manic Vandal</a>
+							<br />3 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Traitorous_Blood" onclick="autoCardWindow(this)" href="javascript:void()">Traitorous Blood</a>
+							<br />3 
+
+		<a class="nodec" onmouseover="ChangeBigCard(1, this)" keyName="name" keyValue="Vulshok_Refugee" onclick="autoCardWindow(this)" href="javascript:void()">Vulshok Refugee</a>
+							<br />
+							<hr size="1" width="50%" align="left" class="decktotals" />
+							<span class="decktotals">15 sideboard cards</span>
+							<br />
+							<br />
+						</td>
+						<td valign="top">
+							<div style="height:220px;width:185px;">
+								<span />
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div class="mtgbigcard sidedeck" id="bigcard_1">
+					<img src="http://Gatherer.wizards.com/Handlers/Image.ashx?size=small&amp;multiverseid=10100000&amp;type=card" class="sidedeckcard" />
+				</div>
+			</div>
+			<br />
+		</div>
+	</div>
+</div>

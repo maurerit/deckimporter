@@ -34,36 +34,32 @@ public class MtgVaultDeckImporter implements DeckImporter {
 	
 	private DeckSaver saver = new MageFileDeckSaver();
 	
-	/*
-	 * (non-Javadoc)
-	 * @see net.maurerit.mtg.DeckImporter#importerFor()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ImporterParams importerFor ( ) {
 		return new ImporterParams("http", "mtgvault.com");
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see net.maurerit.mtg.DeckImporter#setDeckSaver(net.maurerit.mtg.DeckSaver)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDeckSaver ( DeckSaver saver ) {
 		this.saver = saver;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see net.maurerit.mtg.DeckImporter#getDeckSaver()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public DeckSaver getDeckSaver ( ) {
 		return this.saver;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see net.maurerit.mtg.DeckImporter#importDeck(java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Deck importDeck ( String url ) {
@@ -125,6 +121,15 @@ public class MtgVaultDeckImporter implements DeckImporter {
 		}
 		
 		return importedDeck;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Deck importDeck(String url, ImporterOptions options) {
+		// TODO Auto-generated method stub
+		return null;
 	}
     
     public static Integer getCardNumber(String s) {
