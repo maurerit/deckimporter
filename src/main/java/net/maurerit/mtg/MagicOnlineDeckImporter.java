@@ -106,7 +106,7 @@ public class MagicOnlineDeckImporter implements DeckImporter
 
 			// Search through the player Elements collection to find the one with a
 			// text value beginning with the passed in options[PLAYER_OPTION_NAME].
-			for (Element element : players) {
+			for ( Element element : players ) {
 				if (element.childNode(0) instanceof TextNode) {
 					String wholeText = ((TextNode) element.childNode(0)).getWholeText();
 					String playerName = wholeText.substring(0, wholeText.indexOf(' '));
@@ -116,6 +116,10 @@ public class MagicOnlineDeckImporter implements DeckImporter
 						break;
 					}
 				}
+			}
+			
+			if ( foundDeck == null ) {
+				throw new ImportException("Could not find a deck to parse.");
 			}
 			
 			importedDeck = importDeck(foundDeck);
@@ -132,11 +136,13 @@ public class MagicOnlineDeckImporter implements DeckImporter
 		importedDeck.setMainBoard(new MainBoard());
 		importedDeck.setSideBoard(new SideBoard());
 		
+		// Pass one is a portion of the main deck
 		Element deckTds = node.select("table.cardgroup tr:gt(0) > td").first();
 		List<Node> possibleDeck = deckTds.childNodes();
 		
 		DeckImporterUtils.parseCardsFromNodes(possibleDeck, importedDeck);
 		
+		// Pass two is the rest of the main deck and the sideboard.
 		deckTds = node.select("table.cardgroup tr:gt(0) > td").get(1);
 		possibleDeck = deckTds.childNodes();
 		

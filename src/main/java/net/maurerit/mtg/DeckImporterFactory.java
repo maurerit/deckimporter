@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 
-import net.maurerit.validation.MultiParameterException;
-import net.maurerit.validation.ParameterException;
 import net.maurerit.validation.Validation;
 
 import org.slf4j.Logger;
@@ -33,7 +31,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
  */
-public class DeckImporterFactory
+public final class DeckImporterFactory
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeckImporterFactory.class);
 	

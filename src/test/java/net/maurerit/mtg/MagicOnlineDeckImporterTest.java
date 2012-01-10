@@ -17,6 +17,7 @@
 package net.maurerit.mtg;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
@@ -97,5 +98,17 @@ public class MagicOnlineDeckImporterTest
 		assertTrue("Should have 'SB: 3 [NPH:38] Mental Misstep'", actual.contains("SB: 3 [NPH:38] Mental Misstep"));
 		assertTrue("Should have 'SB: 1 [NPH:161] Sword of War and Peace'", actual.contains("SB: 1 [NPH:161] Sword of War and Peace"));
 		assertTrue("Should have 'SB: 1 [ISD:213] Geist of Saint Traft'", actual.contains("SB: 1 [ISD:213] Geist of Saint Traft"));
+	}
+	
+	@Test
+	public void shouldFailToImportNoOnesDeck ( ) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, MalformedURLException {
+		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL("http://www.wizards.com/Magic/Digital/MagicOnlineTourn.aspx?x=mtg/digital/magiconline/tourn/3193365"));
+		ImporterOptions options = new ImporterOptions(MagicOnlineDeckImporter.PLAYER_NAME_OPTION, "noone");
+		
+		try {
+			importer.importDeck("http://www.wizards.com/Magic/Digital/MagicOnlineTourn.aspx?x=mtg/digital/magiconline/tourn/3193365", options);
+			fail ( "Should have thrown an ImportException due to noone's deck not existing.");
+		}
+		catch ( ImportException e ) { /* Good Test Case */ }
 	}
 }

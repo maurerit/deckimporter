@@ -25,6 +25,10 @@ public class ImportException extends RuntimeException
 {
 	private static final long serialVersionUID = 9034050699561027482L;
 	
+	public ImportException ( String message ) {
+		super(message);
+	}
+	
 	public ImportException ( String message, Throwable cause ) {
 		super(message, cause);
 	}

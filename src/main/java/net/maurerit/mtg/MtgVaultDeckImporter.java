@@ -83,7 +83,7 @@ public class MtgVaultDeckImporter implements DeckImporter {
                 	
                 	for ( int idx = 0; idx < total; idx++ ) {
                 		Card card = new Card();
-                		card.setName(cardData.substring(cardData.indexOf("x") + 2));
+                		card.setName(cardData.substring(cardData.indexOf('x') + 2));
                 		card.setCardNumber(getCardNumber(cardInfo.select("td[class$=cardinfo]").get(8).text()));
                 		card.setExpansionSetCode(cardLink.substring(editionInd, editionInd + 3));
                 		

@@ -82,7 +82,7 @@ public class TcgPlayerDeckImporter implements DeckImporter
 			Validation.begin()
 					  .noGreaterThan(result.size(), 1, "result.size")
 					  .check()
-					  .noLessThan(result.get(0).childNodes().size(), DeckImporterUtils.DECK_TAG_COUNT, "result.childNodes.size")
+					  .noLessThan(result.get(0).childNodes().size(), DeckImporterUtils.CARD_TAG_COUNT, "result.childNodes.size")
 					  .check();
 			
 			Element cardTd = result.get(0);

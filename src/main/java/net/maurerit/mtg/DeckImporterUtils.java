@@ -47,13 +47,15 @@ import org.mage.shared.xml.Deck;
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
  */
-public class DeckImporterUtils
+public final class DeckImporterUtils
 {
 
 	public static final Pattern CARD_COUNT_PATTERN = Pattern.compile("\\n*(\\d+)\\W*");
-	public static final int DECK_TAG_COUNT = 3;
+	public static final int CARD_TAG_COUNT = 3;
 	public static final Pattern MTGVAULT_SET_PATTERN = Pattern.compile(".*Edition=([A-Z0-9]{3})");
 	public static final String BASE_CARD_URL = "http://www.mtgvault.com/ViewCard.aspx?CardName={1}";
+	
+	private DeckImporterUtils ( ) { }
 	
 	/**
 	 * Iterates through the <code>possibleDeck</code> parameter and attempts to parse out cards
@@ -79,7 +81,7 @@ public class DeckImporterUtils
 			startedSideBoard = startingSideBoard(subList) || startedSideBoard;
 			
 			if ( startsCard(subList) ) {
-				List<Card> cards = parseCard(new ArrayList<Node>(possibleDeck.subList(idx, idx + 3)));
+				List<Card> cards = parseCard(new ArrayList<Node>(possibleDeck.subList(idx, idx + CARD_TAG_COUNT)));
 				CardList cardList = importedDeck.getMainBoard();
 				
 				if ( startedSideBoard ) {
@@ -110,7 +112,7 @@ public class DeckImporterUtils
 		boolean startsCard = false;
 		
 		//Firstly check that we have at least 3 child nodes
-		if ( elements != null && !elements.isEmpty() && elements.size() >= DECK_TAG_COUNT ) {
+		if ( elements != null && !elements.isEmpty() && elements.size() >= CARD_TAG_COUNT ) {
 			//The top three nodes should be of pattern:
 			//	TextNode - this contains the card count
 			//	a Element - a link to the card
@@ -143,7 +145,7 @@ public class DeckImporterUtils
 	 */
 	public static List<Card> parseCard ( List<Node> nodes ) throws IOException {
 		Validation.begin()
-				  .noLessThan(nodes.size(), DECK_TAG_COUNT, "nodes.size")
+				  .noLessThan(nodes.size(), CARD_TAG_COUNT, "nodes.size")
 				  .check();
 		List<Card> cards = new ArrayList<Card>();
 		
