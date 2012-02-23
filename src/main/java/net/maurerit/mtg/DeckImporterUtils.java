@@ -24,15 +24,12 @@ import java.util.regex.Pattern;
 
 import net.maurerit.validation.Validation;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.mage.shared.xml.Card;
-import org.mage.shared.xml.CardList;
-import org.mage.shared.xml.Deck;
+import org.mage.shared.xmldb.Card;
+import org.mage.shared.xmldb.Deck;
 
 /**
  * Methods in this class are capable of parsing decks out of magic.tcgplayer.com
@@ -52,8 +49,6 @@ public final class DeckImporterUtils
 
 	public static final Pattern CARD_COUNT_PATTERN = Pattern.compile("\\n*(\\d+)\\W*");
 	public static final int CARD_TAG_COUNT = 3;
-	public static final Pattern MTGVAULT_SET_PATTERN = Pattern.compile(".*Edition=([A-Z0-9]{3})");
-	public static final String BASE_CARD_URL = "http://www.mtgvault.com/ViewCard.aspx?CardName={1}";
 	
 	private DeckImporterUtils ( ) { }
 	
@@ -82,13 +77,13 @@ public final class DeckImporterUtils
 			
 			if ( startsCard(subList) ) {
 				List<Card> cards = parseCard(new ArrayList<Node>(possibleDeck.subList(idx, idx + CARD_TAG_COUNT)));
-				CardList cardList = importedDeck.getMainBoard();
+				List<Card> cardList = importedDeck.getMainBoardCards();
 				
 				if ( startedSideBoard ) {
-					cardList = importedDeck.getSideBoard();
+					cardList = importedDeck.getSideBoardCards();
 				}
 				
-				cardList.getCards().addAll(cards);
+				cardList.addAll(cards);
 				
 				idx += 2;
 			}
@@ -151,39 +146,12 @@ public final class DeckImporterUtils
 		
 		Matcher matcher = CARD_COUNT_PATTERN.matcher(((TextNode)nodes.get(0)).getWholeText());
 		if ( matcher.matches() ) {
-			//XXX: Build up a card database for easier querying of card meta data.
 			String cardName = ((TextNode)nodes.get(1).childNode(0)).getWholeText();
-			Document cardDoc = Jsoup.connect(BASE_CARD_URL.replace("{1}", cardName.replace(" ", "%20"))).get();
+			Card foundCard = CardFactory.findCard(cardName);
 			
-			//This is the set of the latest version of this card, but its a readable set and its
-			//in some HTML somewhat similar to <td class="cardinfo"><b>Edition:</b>" {SET_FULL_NAME}"</td>
-			//we'll dig into that structure and trim out the leading " " and just have a {SET_FULL_NAME} which
-			//we'll use to find the code for in the list of available editions further down the page in subsequent $("td.cardinfo")'s
-			//after the 12th index of that select.
-			String setNameToFind = ((TextNode)cardDoc.select("td.cardinfo").get(3).childNode(1)).getWholeText().trim();
-			String setCode = null;
-			
-			//Find the latest set by selecting the img tag with an immediate a sibling that contains the set we're looking for			
-			//TODO: Might want to offer a way to inspect some preferences for people that like to play with certain images.
-			Element setLink = cardDoc.select("td.cardinfo > img ~ a:contains(" + setNameToFind + ")").get(0);
-			Matcher setMatcher = MTGVAULT_SET_PATTERN.matcher(setLink.attr("href"));
-			
-			if ( setMatcher.matches() &&
-				 ((TextNode)setLink.childNode(0)).getWholeText().equalsIgnoreCase(setNameToFind) )
-			{
-				setCode = setMatcher.group(1);
-			}
-			
-			if ( setCode != null ) {
-				Card card = new Card();
-				card.setName(cardName);
-				card.setExpansionSetCode(setCode);
-				card.setCardNumber(MtgVaultDeckImporter.getCardNumber(cardDoc.select("td.cardinfo").get(8).text()));
-				
-				int cardCount = Integer.parseInt(matcher.group(1));
-				for ( int idx = 0; idx < cardCount; idx++ ) {
-					cards.add(card);
-				}
+			int cardCount = Integer.parseInt(matcher.group(1));
+			for ( int idx = 0; idx < cardCount; idx++ ) {
+				cards.add(foundCard);
 			}
 		}
 		

@@ -21,7 +21,7 @@ import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.mage.shared.xml.Deck;
+import org.mage.shared.xmldb.Deck;
 
 /**
  * Holds utility methods I've found useful for deck importer tests.

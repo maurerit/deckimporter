@@ -26,9 +26,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.mage.shared.xml.Deck;
-import org.mage.shared.xml.MainBoard;
-import org.mage.shared.xml.SideBoard;
+import org.mage.shared.xmldb.Deck;
 
 /**
  * TODO: Javadoc me
@@ -133,8 +131,6 @@ public class MagicOnlineDeckImporter implements DeckImporter
 
 	private Deck importDeck ( Element node ) throws IOException {
 		Deck importedDeck = new Deck();
-		importedDeck.setMainBoard(new MainBoard());
-		importedDeck.setSideBoard(new SideBoard());
 		
 		// Pass one is a portion of the main deck
 		Element deckTds = node.select("table.cardgroup tr:gt(0) > td").first();

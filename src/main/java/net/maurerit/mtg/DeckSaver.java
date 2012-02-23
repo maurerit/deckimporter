@@ -19,7 +19,8 @@ package net.maurerit.mtg;
 import java.io.File;
 import java.net.URL;
 
-import org.mage.shared.xml.Deck;
+import org.mage.shared.xmldb.Deck;
+import org.mage.shared.xmldb.Library;
 
 /**
  * This interface defines the methods to save an imported {@link Library}

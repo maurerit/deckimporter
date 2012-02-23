@@ -10,7 +10,8 @@ import org.junit.runners.Suite.SuiteClasses;
 				TcgPlayerDeckImporterTest.class,
 				MageFileDeckSaverTest.class,
 				DeckImporterUtilsTest.class,
-				MagicOnlineDeckImporterTest.class })
+				MagicOnlineDeckImporterTest.class,
+				MagicLeagueDeckImporterTest.class})
 public class AllTests {
 
 }

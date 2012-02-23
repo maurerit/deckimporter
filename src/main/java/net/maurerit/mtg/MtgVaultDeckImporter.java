@@ -21,10 +21,8 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.mage.shared.xml.Card;
-import org.mage.shared.xml.Deck;
-import org.mage.shared.xml.MainBoard;
-import org.mage.shared.xml.SideBoard;
+import org.mage.shared.xmldb.Card;
+import org.mage.shared.xmldb.Deck;
 
 /**
  *
@@ -64,8 +62,6 @@ public class MtgVaultDeckImporter implements DeckImporter {
 	@Override
 	public Deck importDeck ( String url ) {
 		Deck importedDeck = new Deck();
-		importedDeck.setMainBoard(new MainBoard());
-		importedDeck.setSideBoard(new SideBoard());
 		
 		try {
 			Document deckInfo = Jsoup.connect(url).get();
@@ -87,7 +83,7 @@ public class MtgVaultDeckImporter implements DeckImporter {
                 		card.setCardNumber(getCardNumber(cardInfo.select("td[class$=cardinfo]").get(8).text()));
                 		card.setExpansionSetCode(cardLink.substring(editionInd, editionInd + 3));
                 		
-                		importedDeck.getMainBoard().getCards().add(card);
+                		importedDeck.getMainBoardCards().add(card);
                 	}
                 }
 	        }
@@ -111,7 +107,7 @@ public class MtgVaultDeckImporter implements DeckImporter {
                 		card.setCardNumber(getCardNumber(cardInfo.select("td.cardinfo").get(8).text()));
                 		card.setExpansionSetCode(cardLink.substring(editionInd, editionInd + 3));
                 		
-                		importedDeck.getSideBoard().getCards().add(card);
+                		importedDeck.getSideBoardCards().add(card);
                 	}
                 }
 	        }

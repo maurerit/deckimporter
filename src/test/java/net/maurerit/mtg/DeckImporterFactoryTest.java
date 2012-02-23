@@ -87,8 +87,9 @@ public class DeckImporterFactoryTest {
 		expectedParamHosts.add("mtgvault.com");
 		expectedParamHosts.add("magic.tcgplayer.com");
 		expectedParamHosts.add("www.wizards.com");
+		expectedParamHosts.add("www.magic-league.com");
 		
-		assertEquals(3, params.size());
+		assertEquals(4, params.size());
 		
 		int matchesFound = 0;
 		
@@ -101,6 +102,6 @@ public class DeckImporterFactoryTest {
 		}
 		
 		
-		assertEquals("Not all expected importers were found.", 3, matchesFound);
+		assertEquals("Not all expected importers were found.", 4, matchesFound);
 	}
 }

@@ -13,7 +13,7 @@ public class DeckImporterUtilsTest
 
 	@Test
 	public void shouldParseSetsProperly ( ) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		Pattern setPattern = DeckImporterUtils.MTGVAULT_SET_PATTERN;
+		Pattern setPattern = MtgVault.MTGVAULT_SET_PATTERN;
 		
 		String[] tests = { "Edition=M12", "Edition=ISD", "Edition=WWK", "ViewCard.aspx?CardName=Thrun,+the+Last+Troll&Edition=MBS" };
 		String[] expecteds = { "M12", "ISD", "WWK", "MBS" };

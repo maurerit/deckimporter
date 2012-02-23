@@ -16,7 +16,9 @@
  */
 package net.maurerit.mtg;
 
-import org.mage.shared.xml.Deck;
+import java.net.URL;
+
+import org.mage.shared.xmldb.Deck;
 
 /**
  * A DeckImporter is any object that can import a set of cards from a remote host,

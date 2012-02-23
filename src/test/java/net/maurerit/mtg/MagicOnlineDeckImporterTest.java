@@ -24,7 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.junit.Test;
-import org.mage.shared.xml.Deck;
+import org.mage.shared.xmldb.Deck;
 
 /**
  * TODO: Javadoc me

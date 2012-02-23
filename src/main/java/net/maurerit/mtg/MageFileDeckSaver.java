@@ -29,8 +29,8 @@ import java.util.Map;
 
 import net.maurerit.validation.Validation;
 
-import org.mage.shared.xml.Card;
-import org.mage.shared.xml.Deck;
+import org.mage.shared.xmldb.Card;
+import org.mage.shared.xmldb.Deck;
 
 /**
  * TODO: Javadoc me
@@ -95,19 +95,19 @@ public class MageFileDeckSaver implements DeckSaver {
 	 */
 	private String formatDeck ( Deck deck ) {
 		Validation.begin()
-		          .notNull(deck.getMainBoard(), "deck.mainBoard")
-		          .notNull(deck.getSideBoard(), "deck.sideBoard")
+		          .notNull(deck.getMainBoardCards(), "deck.mainBoard")
+		          .notNull(deck.getSideBoardCards(), "deck.sideBoard")
 		          .check();
 		StringBuilder sb = new StringBuilder();
 		Map<String, Map.Entry<Card, Integer>> mainBoardCardCounts = new HashMap<String, Map.Entry<Card, Integer>>();
 		Map<String, Map.Entry<Card, Integer>> sideBoardCardCounts = new HashMap<String, Map.Entry<Card, Integer>>();
 		
-		for ( Card card : deck.getMainBoard().getCards() ) {
+		for ( Card card : deck.getMainBoardCards() ) {
 			Map.Entry<Card, Integer> entry = getCardEntryFromMap(card, mainBoardCardCounts);
 			entry.setValue(entry.getValue() + 1);
 		}
 		
-		for ( Card card : deck.getSideBoard().getCards() ) {
+		for ( Card card : deck.getSideBoardCards() ) {
 			Map.Entry<Card, Integer> entry = getCardEntryFromMap(card, sideBoardCardCounts);
 			entry.setValue(entry.getValue() + 1);
 		}
@@ -137,6 +137,9 @@ public class MageFileDeckSaver implements DeckSaver {
 	 * @return The found or created entry for the card.
 	 */
 	private Map.Entry<Card, Integer> getCardEntryFromMap ( Card card, Map<String, Map.Entry<Card, Integer>> map ) {
+//		Validation.begin()
+//		          .notNull(map, "map")
+//		          .check();
 		Map.Entry<Card, Integer> entry = map.get(card.getName());
 		
 		if ( entry == null ) {

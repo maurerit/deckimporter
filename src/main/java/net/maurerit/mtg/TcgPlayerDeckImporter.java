@@ -26,9 +26,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
-import org.mage.shared.xml.Deck;
-import org.mage.shared.xml.MainBoard;
-import org.mage.shared.xml.SideBoard;
+import org.mage.shared.xmldb.Deck;
 
 /**
  * Of course one of the most useful sites I've found for tournament information
@@ -72,8 +70,6 @@ public class TcgPlayerDeckImporter implements DeckImporter
 	@Override
 	public Deck importDeck ( String url ) {
 		Deck importedDeck = new Deck();
-		importedDeck.setMainBoard(new MainBoard());
-		importedDeck.setSideBoard(new SideBoard());
 		
 		try {
 			Document deckInfo = Jsoup.connect(url).get();

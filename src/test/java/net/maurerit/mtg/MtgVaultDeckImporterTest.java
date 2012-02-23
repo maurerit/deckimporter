@@ -24,10 +24,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.junit.Test;
-import org.mage.shared.xml.Card;
-import org.mage.shared.xml.Deck;
-import org.mage.shared.xml.MainBoard;
-import org.mage.shared.xml.SideBoard;
+import org.mage.shared.xmldb.Card;
+import org.mage.shared.xmldb.Deck;
 
 /**
  * Runs tests to test the {@link MtgVaultDeckImporter}.
@@ -53,22 +51,20 @@ public class MtgVaultDeckImporterTest
 		forest.setCardNumber(249);
 		forest.setName("Forest");
 		forest.setExpansionSetCode("ZEN");
-		deck.setMainBoard(new MainBoard());
-		deck.getMainBoard().getCards().add(forest);
+		deck.getMainBoardCards().add(forest);
 		
 		Card copperhorn = new Card();
 		copperhorn.setCardNumber(116);
 		copperhorn.setName("Copperhorn Scout");
 		copperhorn.setExpansionSetCode("SOM");
-		deck.getMainBoard().getCards().add(copperhorn);
-		deck.setSideBoard(new SideBoard());
-		deck.getSideBoard().getCards().add(copperhorn);
+		deck.getMainBoardCards().add(copperhorn);
+		deck.getSideBoardCards().add(copperhorn);
 		
 		Card blah = new Card();
 		blah.setCardNumber(223);
 		blah.setName("Blah");
 		blah.setExpansionSetCode("TMP");
-		deck.getSideBoard().getCards().add(blah);
+		deck.getSideBoardCards().add(blah);
 		
 		MageFileDeckSaver saver = new MageFileDeckSaver();
 		actual = DeckImporterTestUtils.invokeDeckSaversFormatMethod(saver, deck);
