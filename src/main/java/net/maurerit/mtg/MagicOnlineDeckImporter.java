@@ -35,8 +35,6 @@ import org.mage.shared.xmldb.Deck;
  */
 public class MagicOnlineDeckImporter implements DeckImporter
 {
-	public static final String	PLAYER_NAME_OPTION	= "PlayerName";
-
 	private DeckSaver			saver				= new MageFileDeckSaver();
 
 	/**
