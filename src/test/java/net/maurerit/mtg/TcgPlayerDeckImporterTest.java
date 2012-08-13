@@ -22,12 +22,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import net.maurerit.mtg.card.CardFactory;
 import net.maurerit.mtg.deck.DeckImporter;
 import net.maurerit.mtg.deck.DeckImporterFactory;
 import net.maurerit.mtg.deck.impl.MageFileDeckSaver;
 import net.maurerit.mtg.deck.impl.TcgPlayerDeckImporter;
 
 import org.junit.Test;
+import org.mage.shared.xmldb.Card;
 import org.mage.shared.xmldb.Deck;
 
 /**
@@ -67,11 +69,11 @@ public class TcgPlayerDeckImporterTest
 		assertTrue("Should have '3 [MBS:75] Slagstorm'", actual.contains("3 [MBS:75] Slagstorm"));
 		assertTrue("Should have '4 [MBS:134] Sphere of the Suns'", actual.contains("4 [MBS:134] Sphere of the Suns"));
 		assertTrue("Should have '4 [SOM:225] Copperline Gorge'", actual.contains("4 [SOM:225] Copperline Gorge"));
-		assertTrue("Should have '5 [ISD:262] Forest'", actual.contains("5 [ISD:262] Forest"));
+		assertTrue("Should have '5 Forest'", actual.contains(DeckImporterTestUtils.lookupAndFormatCard(5, "Forest")));
 		assertTrue("Should have '4 [MBS:145] Inkmoth Nexus'", actual.contains("4 [MBS:145] Inkmoth Nexus"));
 		assertTrue("Should have '3 [ISD:243] Kessig Wolf Run'", actual.contains("3 [ISD:243] Kessig Wolf Run"));
-		assertTrue("Should have '6 [ISD:259] Mountain'", actual.contains("6 [ISD:259] Mountain"));
-		assertTrue("Should have '4 [M12:228] Rootbound Crag'", actual.contains("4 [M12:228] Rootbound Crag"));
+		assertTrue("Should have '6 Mountain'", actual.contains(DeckImporterTestUtils.lookupAndFormatCard(6, "Mountain")));
+		assertTrue("Should have '4 Rootbound Crag'", actual.contains(DeckImporterTestUtils.lookupAndFormatCard(4, "Rootbound Crag")));
 		assertTrue("Should have 'SB: 2 [ISD:127] Ancient Grudge'", actual.contains("SB: 2 [ISD:127] Ancient Grudge"));
 		assertTrue("Should have 'SB: 4 [M12:164] Autumn's Veil'", actual.contains("SB: 4 [M12:164] Autumn's Veil"));
 		assertTrue("Should have 'SB: 1 [NPH:103] Beast Within'", actual.contains("SB: 1 [NPH:103] Beast Within"));

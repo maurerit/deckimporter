@@ -21,8 +21,10 @@ import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import net.maurerit.mtg.card.CardFactory;
 import net.maurerit.mtg.deck.impl.MageFileDeckSaver;
 
+import org.mage.shared.xmldb.Card;
 import org.mage.shared.xmldb.Deck;
 
 /**
@@ -41,5 +43,17 @@ public class DeckImporterTestUtils {
 		StringWriter writer = new StringWriter();
 		throwable.printStackTrace(new PrintWriter(writer));
 		return writer.toString();
+	}
+
+	public static String lookupAndFormatCard ( int count, String cardName ) {
+		Card card = CardFactory.findCard(cardName);
+		
+		String formattedCard = count + " [" + card.getExpansionSetCode() + ":" + card.getCardNumber() + "] " + card.getName();
+		
+		return formattedCard;
+	}
+
+	public static CharSequence lookupAndFormatCardSb( int count, String cardName ) {
+		return "SB: " + lookupAndFormatCard(count, cardName);
 	}
 }
