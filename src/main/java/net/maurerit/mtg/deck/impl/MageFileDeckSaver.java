@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package net.maurerit.mtg;
+package net.maurerit.mtg.deck.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,6 +27,8 @@ import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.maurerit.mtg.SaveException;
+import net.maurerit.mtg.deck.DeckSaver;
 import net.maurerit.validation.Validation;
 
 import org.mage.shared.xmldb.Card;

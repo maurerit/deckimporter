@@ -24,6 +24,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.maurerit.mtg.deck.DeckImporter;
+import net.maurerit.mtg.deck.DeckImporterFactory;
+import net.maurerit.mtg.deck.impl.MtgVaultDeckImporter;
 import net.maurerit.validation.MultiParameterException;
 import net.maurerit.validation.ParameterException;
 

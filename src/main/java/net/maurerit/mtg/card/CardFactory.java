@@ -14,13 +14,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package net.maurerit.mtg;
+package net.maurerit.mtg.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
+
+import net.maurerit.mtg.deck.DeckImporterFactory;
 
 import org.mage.shared.xmldb.Card;
 import org.slf4j.Logger;

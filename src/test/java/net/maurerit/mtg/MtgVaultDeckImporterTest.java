@@ -23,6 +23,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import net.maurerit.mtg.deck.DeckImporter;
+import net.maurerit.mtg.deck.DeckImporterFactory;
+import net.maurerit.mtg.deck.impl.MageFileDeckSaver;
+import net.maurerit.mtg.deck.impl.MtgVaultDeckImporter;
+
 import org.junit.Test;
 import org.mage.shared.xmldb.Card;
 import org.mage.shared.xmldb.Deck;

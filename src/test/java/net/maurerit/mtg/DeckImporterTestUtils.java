@@ -21,6 +21,8 @@ import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import net.maurerit.mtg.deck.impl.MageFileDeckSaver;
+
 import org.mage.shared.xmldb.Deck;
 
 /**

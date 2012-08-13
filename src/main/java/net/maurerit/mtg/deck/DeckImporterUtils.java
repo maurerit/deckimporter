@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package net.maurerit.mtg;
+package net.maurerit.mtg.deck;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.maurerit.mtg.card.CardFactory;
 import net.maurerit.validation.Validation;
 
 import org.jsoup.nodes.Element;

@@ -14,11 +14,13 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package net.maurerit.mtg;
+package net.maurerit.mtg.card;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.maurerit.mtg.deck.impl.MtgVaultDeckImporter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,7 +33,7 @@ import org.mage.shared.xmldb.Card;
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
  */
-public class MtgVault implements CardProvider
+public class MtgVaultCardProvider implements CardProvider
 {
 	public static final String BASE_CARD_URL = "http://www.mtgvault.com/ViewCard.aspx?CardName={1}";
 	public static final Pattern MTGVAULT_SET_PATTERN = Pattern.compile(".*Edition=([A-Z0-9]{3})");

@@ -14,11 +14,17 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package net.maurerit.mtg;
+package net.maurerit.mtg.deck.impl;
 
 import java.io.IOException;
 import java.util.List;
 
+import net.maurerit.mtg.ImportException;
+import net.maurerit.mtg.ImporterOptions;
+import net.maurerit.mtg.ImporterParams;
+import net.maurerit.mtg.deck.DeckImporter;
+import net.maurerit.mtg.deck.DeckImporterUtils;
+import net.maurerit.mtg.deck.DeckSaver;
 import net.maurerit.validation.Validation;
 
 import org.jsoup.Jsoup;

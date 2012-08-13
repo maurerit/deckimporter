@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A simple container to hold many options for a {@link DeckImporter}
+ * A simple container to hold many options for a {@link net.maurerit.mtg.deck.DeckImporter}
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
  */

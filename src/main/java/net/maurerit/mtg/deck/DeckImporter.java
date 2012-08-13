@@ -14,9 +14,13 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package net.maurerit.mtg;
+package net.maurerit.mtg.deck;
 
 import java.net.URL;
+
+import net.maurerit.mtg.ImportException;
+import net.maurerit.mtg.ImporterOptions;
+import net.maurerit.mtg.ImporterParams;
 
 import org.mage.shared.xmldb.Deck;
 

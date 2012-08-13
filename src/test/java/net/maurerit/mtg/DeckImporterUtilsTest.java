@@ -6,6 +6,9 @@ import static org.junit.Assert.fail;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.maurerit.mtg.card.MtgVaultCardProvider;
+import net.maurerit.mtg.deck.DeckImporterUtils;
+
 import org.junit.Test;
 
 public class DeckImporterUtilsTest
@@ -13,7 +16,7 @@ public class DeckImporterUtilsTest
 
 	@Test
 	public void shouldParseSetsProperly ( ) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		Pattern setPattern = MtgVault.MTGVAULT_SET_PATTERN;
+		Pattern setPattern = MtgVaultCardProvider.MTGVAULT_SET_PATTERN;
 		
 		String[] tests = { "Edition=M12", "Edition=ISD", "Edition=WWK", "ViewCard.aspx?CardName=Thrun,+the+Last+Troll&Edition=MBS" };
 		String[] expecteds = { "M12", "ISD", "WWK", "MBS" };

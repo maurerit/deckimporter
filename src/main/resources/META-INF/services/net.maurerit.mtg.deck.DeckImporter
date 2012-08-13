@@ -1,0 +1,4 @@
+net.maurerit.mtg.deck.impl.MtgVaultDeckImporter
+net.maurerit.mtg.deck.impl.TcgPlayerDeckImporter
+net.maurerit.mtg.deck.impl.MagicOnlineDeckImporter
+net.maurerit.mtg.deck.impl.MagicLeagueDeckImporter

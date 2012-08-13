@@ -14,24 +14,36 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package net.maurerit.mtg;
+package net.maurerit.mtg.deck;
 
-import org.mage.shared.xmldb.Card;
+import java.util.List;
+import java.util.Map;
+
 
 /**
- * Runtime Pluggable beans which can provide fully 'hydrated' {@link Card}
- * instances from very little information (assuming sensible defaults) <code>yada yada</code>.
+ * TODO: Javadoc me
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
- * @since 1.2.0
  */
-public interface CardProvider
+public interface MultiDeckImporter extends DeckImporter
 {
 	/**
-	 * TODO: Javadoc Me
+	 * Informs the {@link DeckImporter} where its deck list url is that we
+	 * are interested in.
 	 * 
-	 * @param cardName
+	 * @param url Location of the deck list.
+	 * @return Usually {this} to enable chained calls.  For instance
+	 * <pre>
+	 * multiDeckImporter
+	 *                  .connect("http://www.magic-league.com/tournament/info.php?id=75915&view=decks")
+	 *                  .getDeckLists();
+	 * </pre>
+	 */
+	public MultiDeckImporter connect ( String url );
+	
+	/**
+	 * 
 	 * @return
 	 */
-	Card findCard ( String cardName );
+	public List<Map<String, String>> getDeckLists ( );
 }
