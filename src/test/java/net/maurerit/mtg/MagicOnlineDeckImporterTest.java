@@ -43,7 +43,7 @@ public class MagicOnlineDeckImporterTest
 		String actual = null;
 		
 		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL("http://www.wizards.com/Magic/Digital/MagicOnlineTourn.aspx?x=mtg/digital/magiconline/tourn/3193365"));
-		ImporterOptions options = new ImporterOptions(MagicOnlineDeckImporter.PLAYER_NAME_OPTION, "bejato");
+		ImporterOptions options = new ImporterOptions(DeckImporter.PLAYER_NAME_OPTION, "bejato");
 		Deck importedDeck = importer.importDeck("http://www.wizards.com/Magic/Digital/MagicOnlineTourn.aspx?x=mtg/digital/magiconline/tourn/3193365", options);
 		actual = DeckImporterTestUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), importedDeck);
 		
@@ -73,7 +73,7 @@ public class MagicOnlineDeckImporterTest
 		String actual = null;
 		
 		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL("http://www.wizards.com/Magic/Digital/MagicOnlineTourn.aspx?x=mtg/digital/magiconline/tourn/3193365"));
-		ImporterOptions options = new ImporterOptions(MagicOnlineDeckImporter.PLAYER_NAME_OPTION, "slivernew");
+		ImporterOptions options = new ImporterOptions(DeckImporter.PLAYER_NAME_OPTION, "slivernew");
 		Deck importedDeck = importer.importDeck("http://www.wizards.com/Magic/Digital/MagicOnlineTourn.aspx?x=mtg/digital/magiconline/tourn/3193365", options);
 		actual = DeckImporterTestUtils.invokeDeckSaversFormatMethod(new MageFileDeckSaver(), importedDeck);
 		
@@ -108,7 +108,7 @@ public class MagicOnlineDeckImporterTest
 	@Test
 	public void shouldFailToImportNoOnesDeck ( ) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, MalformedURLException {
 		DeckImporter importer = DeckImporterFactory.createDeckImporter(new URL("http://www.wizards.com/Magic/Digital/MagicOnlineTourn.aspx?x=mtg/digital/magiconline/tourn/3193365"));
-		ImporterOptions options = new ImporterOptions(MagicOnlineDeckImporter.PLAYER_NAME_OPTION, "noone");
+		ImporterOptions options = new ImporterOptions(DeckImporter.PLAYER_NAME_OPTION, "noone");
 		
 		try {
 			importer.importDeck("http://www.wizards.com/Magic/Digital/MagicOnlineTourn.aspx?x=mtg/digital/magiconline/tourn/3193365", options);

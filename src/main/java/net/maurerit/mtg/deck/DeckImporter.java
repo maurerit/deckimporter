@@ -33,6 +33,8 @@ import org.mage.shared.xmldb.Deck;
  */
 public interface DeckImporter
 {
+	public static final String PLAYER_NAME_OPTION = "PlayerName";
+	
 	/**
 	 * Implementations must return at least one {@link ImporterParams}
 	 * which will be used in the matching process when a consumer is

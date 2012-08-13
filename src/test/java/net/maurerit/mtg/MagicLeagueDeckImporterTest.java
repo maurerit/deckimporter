@@ -52,4 +52,8 @@ public class MagicLeagueDeckImporterTest
 		assertTrue("Should have '1 [SOM:225] Copperline Gorge'", actual.contains("1 [SOM:225] Copperline Gorge"));
 	}
 
+	@Test
+	public void shouldImportMagicEdsDeck ( ) {
+		
+	}
 }
