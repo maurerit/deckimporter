@@ -22,8 +22,8 @@ public class AllTests extends Suite {
 		Authenticator authenticator = new Authenticator() {
 
 	        public PasswordAuthentication getPasswordAuthentication() {
-	            return (new PasswordAuthentication("mm66053",
-	                    "Mau79841919*".toCharArray()));
+	            return (new PasswordAuthentication(System.getProperty("http.proxyUser"),
+	                    System.getProperty("http.proxyPass").toCharArray()));
 	        }
 	    };
 	    Authenticator.setDefault(authenticator);
