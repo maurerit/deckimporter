@@ -22,10 +22,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mage.tracker.domain.Card;
+import mage.tracker.domain.CardEdition;
 import net.maurerit.mtg.ImportException;
 import net.maurerit.mtg.ImporterOptions;
 import net.maurerit.mtg.ImporterParams;
 import net.maurerit.mtg.card.CardFactory;
+import net.maurerit.mtg.deck.Deck;
 import net.maurerit.mtg.deck.DeckImporter;
 import net.maurerit.mtg.deck.DeckSaver;
 import net.maurerit.validation.Validation;
@@ -35,8 +38,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.mage.shared.xmldb.Card;
-import org.mage.shared.xmldb.Deck;
 
 /**
  * TODO: Javadoc me
@@ -111,7 +112,7 @@ public class MagicLeagueDeckImporter implements DeckImporter
 		Elements sideBoard = node.select("td.SB");
 		
 		try {
-			List<Card> cards = parseCards(mainDeck);
+			List<CardEdition> cards = parseCards(mainDeck);
 			parsedDeck.getMainBoardCards().addAll(cards);
 			cards = parseCards(sideBoard);
 			parsedDeck.getSideBoardCards().addAll(cards);
@@ -123,8 +124,8 @@ public class MagicLeagueDeckImporter implements DeckImporter
 		return parsedDeck;
 	}
 	
-	private List<Card> parseCards ( Elements elements ) throws IOException {
-		List<Card> cards = new ArrayList<Card>();
+	private List<CardEdition> parseCards ( Elements elements ) throws IOException {
+		List<CardEdition> cards = new ArrayList<CardEdition>();
 		
 		for ( Element element : elements ) {
 			for ( Node lowestLevel : element.childNodes() ) {
@@ -132,7 +133,7 @@ public class MagicLeagueDeckImporter implements DeckImporter
 					Matcher matcher = COUNT_NAME_PATTERN.matcher(((TextNode) lowestLevel).getWholeText().trim());
 					
 					if ( matcher.matches() ) {
-						Card card = CardFactory.findCard(matcher.group(3));
+						CardEdition card = CardFactory.findCard(matcher.group(3));
 						cards.add(card);
 					}
 				}

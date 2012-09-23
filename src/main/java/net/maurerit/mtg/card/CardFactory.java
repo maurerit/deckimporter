@@ -22,9 +22,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 
+import mage.tracker.domain.Card;
+import mage.tracker.domain.CardEdition;
 import net.maurerit.mtg.deck.DeckImporterFactory;
 
-import org.mage.shared.xmldb.Card;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,10 +40,10 @@ public class CardFactory
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeckImporterFactory.class);
 	
 	// TODO: This should be something better...
-	private static final Map<String, CacheKey<String,Card>> cache = new HashMap<String, CacheKey<String,Card>>();
+	private static final Map<String, CacheKey<String,CardEdition>> cache = new HashMap<String, CacheKey<String,CardEdition>>();
 
-	public static Card findCard ( String cardName ) {
-		Card foundCard = null;
+	public static CardEdition findCard ( String cardName ) {
+		CardEdition foundCard = null;
 		
 		//Start with a dumb cache to help while importing tournaments.
 		if ( !cache.containsKey(cardName) ) {
@@ -52,7 +53,7 @@ public class CardFactory
 				foundCard = provider.findCard(cardName);
 				
 				if ( foundCard != null ) {
-					cache.put(cardName, new CacheKey<String,Card>(cardName,foundCard));
+					cache.put(cardName, new CacheKey<String,CardEdition>(cardName,foundCard));
 				}
 			}
 		}
@@ -66,7 +67,7 @@ public class CardFactory
 	public static List<CacheHit<String, Integer>> getCacheHits ( ) {
 		List<CacheHit<String, Integer>> cacheHits = new ArrayList<CacheHit<String, Integer>>();
 		
-		for ( Map.Entry<String, CacheKey<String,Card>> entry : cache.entrySet() ) {
+		for ( Map.Entry<String, CacheKey<String,CardEdition>> entry : cache.entrySet() ) {
 			cacheHits.add(new CacheHit<String, Integer>(entry.getKey(), entry.getValue().getHits()));
 		}
 		

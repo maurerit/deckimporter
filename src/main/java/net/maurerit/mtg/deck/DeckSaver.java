@@ -21,8 +21,7 @@ import java.net.URL;
 
 import net.maurerit.mtg.SaveException;
 
-import org.mage.shared.xmldb.Deck;
-import org.mage.shared.xmldb.Library;
+import com.sun.jna.Library;
 
 /**
  * This interface defines the methods to save an imported {@link Library}

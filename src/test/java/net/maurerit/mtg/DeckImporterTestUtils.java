@@ -21,11 +21,10 @@ import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import mage.tracker.domain.CardEdition;
 import net.maurerit.mtg.card.CardFactory;
+import net.maurerit.mtg.deck.Deck;
 import net.maurerit.mtg.deck.impl.MageFileDeckSaver;
-
-import org.mage.shared.xmldb.Card;
-import org.mage.shared.xmldb.Deck;
 
 /**
  * Holds utility methods I've found useful for deck importer tests.
@@ -46,9 +45,9 @@ public class DeckImporterTestUtils {
 	}
 
 	public static String lookupAndFormatCard ( int count, String cardName ) {
-		Card card = CardFactory.findCard(cardName);
+		CardEdition card = CardFactory.findCard(cardName);
 		
-		String formattedCard = count + " [" + card.getExpansionSetCode() + ":" + card.getCardNumber() + "] " + card.getName();
+		String formattedCard = count + " [" + card.getExpansion().getCode() + ":" + card.getCardNumber() + "] " + card.getCard().getName();
 		
 		return formattedCard;
 	}

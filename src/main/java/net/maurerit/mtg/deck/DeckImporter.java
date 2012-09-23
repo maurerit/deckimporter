@@ -22,8 +22,6 @@ import net.maurerit.mtg.ImportException;
 import net.maurerit.mtg.ImporterOptions;
 import net.maurerit.mtg.ImporterParams;
 
-import org.mage.shared.xmldb.Deck;
-
 /**
  * A DeckImporter is any object that can import a set of cards from a remote host,
  * local file, web service or any other source of information that pertain to

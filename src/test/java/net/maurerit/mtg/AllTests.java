@@ -5,6 +5,7 @@ import java.net.PasswordAuthentication;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 
@@ -15,7 +16,8 @@ import org.junit.runners.model.RunnerBuilder;
 				MageFileDeckSaverTest.class,
 				DeckImporterUtilsTest.class,
 				MagicOnlineDeckImporterTest.class,
-				MagicLeagueDeckImporterTest.class})
+				MagicLeagueDeckImporterTest.class,
+				TcgPlayerTournamentImporterTest.class})
 public class AllTests extends Suite {
 	public AllTests ( Class<?> klass, RunnerBuilder builder ) throws InitializationError {
 		super(klass, builder);

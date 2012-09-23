@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mage.tracker.domain.CardEdition;
 import net.maurerit.mtg.card.CardFactory;
 import net.maurerit.validation.Validation;
 
@@ -29,8 +30,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.mage.shared.xmldb.Card;
-import org.mage.shared.xmldb.Deck;
 
 /**
  * Methods in this class are capable of parsing decks out of magic.tcgplayer.com
@@ -77,8 +76,8 @@ public final class DeckImporterUtils
 			startedSideBoard = startingSideBoard(subList) || startedSideBoard;
 			
 			if ( startsCard(subList) ) {
-				List<Card> cards = parseCard(new ArrayList<Node>(possibleDeck.subList(idx, idx + CARD_TAG_COUNT)));
-				List<Card> cardList = importedDeck.getMainBoardCards();
+				List<CardEdition> cards = parseCard(new ArrayList<Node>(possibleDeck.subList(idx, idx + CARD_TAG_COUNT)));
+				List<CardEdition> cardList = importedDeck.getMainBoardCards();
 				
 				if ( startedSideBoard ) {
 					cardList = importedDeck.getSideBoardCards();
@@ -139,16 +138,16 @@ public final class DeckImporterUtils
 	 * @return
 	 * @throws IOException
 	 */
-	public static List<Card> parseCard ( List<Node> nodes ) throws IOException {
+	public static List<CardEdition> parseCard ( List<Node> nodes ) throws IOException {
 		Validation.begin()
 				  .noLessThan(nodes.size(), CARD_TAG_COUNT, "nodes.size")
 				  .check();
-		List<Card> cards = new ArrayList<Card>();
+		List<CardEdition> cards = new ArrayList<CardEdition>();
 		
 		Matcher matcher = CARD_COUNT_PATTERN.matcher(((TextNode)nodes.get(0)).getWholeText());
 		if ( matcher.matches() ) {
 			String cardName = ((TextNode)nodes.get(1).childNode(0)).getWholeText();
-			Card foundCard = CardFactory.findCard(cardName);
+			CardEdition foundCard = CardFactory.findCard(cardName);
 			
 			int cardCount = Integer.parseInt(matcher.group(1));
 			for ( int idx = 0; idx < cardCount; idx++ ) {

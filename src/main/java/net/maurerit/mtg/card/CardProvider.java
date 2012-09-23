@@ -16,10 +16,10 @@
  */
 package net.maurerit.mtg.card;
 
-import org.mage.shared.xmldb.Card;
+import mage.tracker.domain.CardEdition;
 
 /**
- * Runtime Pluggable beans which can provide fully 'hydrated' {@link Card}
+ * Runtime Pluggable beans which can provide fully 'hydrated' {@link CardEdition}
  * instances from very little information (assuming sensible defaults) <code>yada yada</code>.
  *
  * @author Matthew L. Maurer maurer.it@gmail.com
@@ -33,5 +33,5 @@ public interface CardProvider
 	 * @param cardName
 	 * @return
 	 */
-	Card findCard ( String cardName );
+	CardEdition findCard ( String cardName );
 }

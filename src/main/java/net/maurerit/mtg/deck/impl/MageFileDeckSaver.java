@@ -27,12 +27,12 @@ import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import mage.tracker.domain.Card;
+import mage.tracker.domain.CardEdition;
 import net.maurerit.mtg.SaveException;
+import net.maurerit.mtg.deck.Deck;
 import net.maurerit.mtg.deck.DeckSaver;
 import net.maurerit.validation.Validation;
-
-import org.mage.shared.xmldb.Card;
-import org.mage.shared.xmldb.Deck;
 
 /**
  * TODO: Javadoc me
@@ -101,16 +101,16 @@ public class MageFileDeckSaver implements DeckSaver {
 		          .notNull(deck.getSideBoardCards(), "deck.sideBoard")
 		          .check();
 		StringBuilder sb = new StringBuilder();
-		Map<String, Map.Entry<Card, Integer>> mainBoardCardCounts = new HashMap<String, Map.Entry<Card, Integer>>();
-		Map<String, Map.Entry<Card, Integer>> sideBoardCardCounts = new HashMap<String, Map.Entry<Card, Integer>>();
+		Map<String, Map.Entry<CardEdition, Integer>> mainBoardCardCounts = new HashMap<String, Map.Entry<CardEdition, Integer>>();
+		Map<String, Map.Entry<CardEdition, Integer>> sideBoardCardCounts = new HashMap<String, Map.Entry<CardEdition, Integer>>();
 		
-		for ( Card card : deck.getMainBoardCards() ) {
-			Map.Entry<Card, Integer> entry = getCardEntryFromMap(card, mainBoardCardCounts);
+		for ( CardEdition card : deck.getMainBoardCards() ) {
+			Map.Entry<CardEdition, Integer> entry = getCardEntryFromMap(card, mainBoardCardCounts);
 			entry.setValue(entry.getValue() + 1);
 		}
 		
-		for ( Card card : deck.getSideBoardCards() ) {
-			Map.Entry<Card, Integer> entry = getCardEntryFromMap(card, sideBoardCardCounts);
+		for ( CardEdition card : deck.getSideBoardCards() ) {
+			Map.Entry<CardEdition, Integer> entry = getCardEntryFromMap(card, sideBoardCardCounts);
 			entry.setValue(entry.getValue() + 1);
 		}
 		
@@ -118,11 +118,11 @@ public class MageFileDeckSaver implements DeckSaver {
 		  .append(deck.getName())
 		  .append(System.getProperty("line.separator"));
 		
-		for ( Map.Entry<Card, Integer> entry : mainBoardCardCounts.values() ) {
+		for ( Map.Entry<CardEdition, Integer> entry : mainBoardCardCounts.values() ) {
 			this.addCardEntry(false, sb, entry);
 		}
 		
-		for ( Map.Entry<Card, Integer> entry : sideBoardCardCounts.values() ) {
+		for ( Map.Entry<CardEdition, Integer> entry : sideBoardCardCounts.values() ) {
 			this.addCardEntry(true, sb, entry);
 		}
 		
@@ -138,15 +138,15 @@ public class MageFileDeckSaver implements DeckSaver {
 	 * @param map The map to search for a card.
 	 * @return The found or created entry for the card.
 	 */
-	private Map.Entry<Card, Integer> getCardEntryFromMap ( Card card, Map<String, Map.Entry<Card, Integer>> map ) {
+	private Map.Entry<CardEdition, Integer> getCardEntryFromMap ( CardEdition card, Map<String, Map.Entry<CardEdition, Integer>> map ) {
 //		Validation.begin()
 //		          .notNull(map, "map")
 //		          .check();
-		Map.Entry<Card, Integer> entry = map.get(card.getName());
+		Map.Entry<CardEdition, Integer> entry = map.get(card.getCard().getName());
 		
 		if ( entry == null ) {
-			entry = new AbstractMap.SimpleEntry<Card, Integer>(card, 0);
-			map.put(card.getName(), entry);
+			entry = new AbstractMap.SimpleEntry<CardEdition, Integer>(card, 0);
+			map.put(card.getCard().getName(), entry);
 		}
 		
 		return entry;
@@ -160,7 +160,7 @@ public class MageFileDeckSaver implements DeckSaver {
 	 * @param sb The StringBuilder to manipulate.
 	 * @param entry The entry containing the card and its count.
 	 */
-	private void addCardEntry ( boolean sideBoard, StringBuilder sb, Map.Entry<Card, Integer> entry ) {
+	private void addCardEntry ( boolean sideBoard, StringBuilder sb, Map.Entry<CardEdition, Integer> entry ) {
 		if ( sideBoard ) {
 			sb.append("SB: ");
 		}
@@ -168,11 +168,11 @@ public class MageFileDeckSaver implements DeckSaver {
 		sb.append(entry.getValue())
 		  .append(" ")
 		  .append("[")
-		  .append(entry.getKey().getExpansionSetCode())
+		  .append(entry.getKey().getExpansion().getCode())
 		  .append(":")
 		  .append(entry.getKey().getCardNumber())
 		  .append("] ")
-		  .append(entry.getKey().getName())
+		  .append(entry.getKey().getCard().getName())
 		  .append(System.getProperty("line.separator"));
 	}
 }

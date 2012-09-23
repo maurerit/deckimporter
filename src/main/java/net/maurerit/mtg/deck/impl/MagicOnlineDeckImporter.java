@@ -22,6 +22,7 @@ import java.util.List;
 import net.maurerit.mtg.ImportException;
 import net.maurerit.mtg.ImporterOptions;
 import net.maurerit.mtg.ImporterParams;
+import net.maurerit.mtg.deck.Deck;
 import net.maurerit.mtg.deck.DeckImporter;
 import net.maurerit.mtg.deck.DeckImporterUtils;
 import net.maurerit.mtg.deck.DeckSaver;
@@ -32,7 +33,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.mage.shared.xmldb.Deck;
 
 /**
  * TODO: Javadoc me

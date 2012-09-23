@@ -18,17 +18,19 @@ package net.maurerit.mtg.deck.impl;
 
 import java.io.IOException;
 
+import mage.tracker.domain.Card;
+import mage.tracker.domain.CardEdition;
+import mage.tracker.domain.Expansion;
 import net.maurerit.mtg.ImportException;
 import net.maurerit.mtg.ImporterOptions;
 import net.maurerit.mtg.ImporterParams;
+import net.maurerit.mtg.deck.Deck;
 import net.maurerit.mtg.deck.DeckImporter;
 import net.maurerit.mtg.deck.DeckSaver;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.mage.shared.xmldb.Card;
-import org.mage.shared.xmldb.Deck;
 
 /**
  *
@@ -84,10 +86,14 @@ public class MtgVaultDeckImporter implements DeckImporter {
             		Document cardInfo = Jsoup.connect(cardLink.replace(" ", "%20")).get();
                 	
                 	for ( int idx = 0; idx < total; idx++ ) {
-                		Card card = new Card();
-                		card.setName(cardData.substring(cardData.indexOf('x') + 2));
+                		Card innerCard = new Card();
+                		CardEdition card = new CardEdition();
+                		card.setCard(innerCard);
+                		innerCard.setName(cardData.substring(cardData.indexOf('x') + 2));
                 		card.setCardNumber(getCardNumber(cardInfo.select("td[class$=cardinfo]").get(8).text()));
-                		card.setExpansionSetCode(cardLink.substring(editionInd, editionInd + 3));
+                		Expansion expansion = new Expansion();
+                		expansion.setCode(cardLink.substring(editionInd, editionInd + 3));
+                		card.setExpansion(expansion);
                 		
                 		importedDeck.getMainBoardCards().add(card);
                 	}
@@ -108,10 +114,14 @@ public class MtgVaultDeckImporter implements DeckImporter {
             		Document cardInfo = Jsoup.connect(cardLink.replace(" ", "%20")).get();
                 	
                 	for ( int idx = 0; idx < total; idx++ ) {
-                		Card card = new Card();
-                		card.setName(cardData.substring(cardData.indexOf('x') + 2));
+                		Card innerCard = new Card();
+                		CardEdition card = new CardEdition();
+                		card.setCard(innerCard);
+                		innerCard.setName(cardData.substring(cardData.indexOf('x') + 2));
                 		card.setCardNumber(getCardNumber(cardInfo.select("td.cardinfo").get(8).text()));
-                		card.setExpansionSetCode(cardLink.substring(editionInd, editionInd + 3));
+                		Expansion expansion = new Expansion();
+                		expansion.setCode(cardLink.substring(editionInd, editionInd + 3));
+                		card.setExpansion(expansion);
                 		
                 		importedDeck.getSideBoardCards().add(card);
                 	}
@@ -134,10 +144,10 @@ public class MtgVaultDeckImporter implements DeckImporter {
 		return null;
 	}
     
-    public static Integer getCardNumber(String s) {
+    public static String getCardNumber(String s) {
         int from = s.indexOf("Number: ") + 8;
         int to = s.indexOf(" /");
         String str = s.substring(from, to);
-        return Integer.parseInt(str);
+        return str;
     }
 }

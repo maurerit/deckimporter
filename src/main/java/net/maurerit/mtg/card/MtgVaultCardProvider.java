@@ -20,13 +20,15 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mage.tracker.domain.Card;
+import mage.tracker.domain.CardEdition;
+import mage.tracker.domain.Expansion;
 import net.maurerit.mtg.deck.impl.MtgVaultDeckImporter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
-import org.mage.shared.xmldb.Card;
 
 /**
  * TODO: Javadoc me
@@ -38,7 +40,7 @@ public class MtgVaultCardProvider implements CardProvider
 	public static final String BASE_CARD_URL = "http://www.mtgvault.com/ViewCard.aspx?CardName={1}";
 	public static final Pattern MTGVAULT_SET_PATTERN = Pattern.compile(".*Edition=([A-Z0-9]{3})");
 
-	public Card findCard ( String cardName ) {
+	public CardEdition findCard ( String cardName ) {
 		try {
 			return findCardByName(cardName);
 		}
@@ -58,8 +60,8 @@ public class MtgVaultCardProvider implements CardProvider
 	 * @throws IOException
 	 */
 	@Deprecated
-	public static Card findCardByName ( String cardName ) throws IOException {
-		Card foundCard = null;
+	public static CardEdition findCardByName ( String cardName ) throws IOException {
+		CardEdition foundCard = null;
 		//XXX: Build up a card database for easier querying of card meta data.
 		Document cardDoc = Jsoup.connect(BASE_CARD_URL.replace("{1}", cardName.replace(" ", "%20"))).get();
 		
@@ -83,9 +85,13 @@ public class MtgVaultCardProvider implements CardProvider
 		}
 		
 		if ( setCode != null ) {
-			foundCard = new Card();
-			foundCard.setName(cardName);
-			foundCard.setExpansionSetCode(setCode);
+			Card innerCard = new Card();
+			foundCard = new CardEdition();
+			foundCard.setCard(innerCard);
+			innerCard.setName(cardName);
+			Expansion expansion = new Expansion();
+			expansion.setCode(setCode);
+			foundCard.setExpansion(expansion);
 			foundCard.setCardNumber(MtgVaultDeckImporter.getCardNumber(cardDoc.select("td.cardinfo").get(8).text()));
 		}
 		

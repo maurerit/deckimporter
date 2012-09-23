@@ -23,14 +23,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import mage.tracker.domain.Card;
+import mage.tracker.domain.CardEdition;
+import mage.tracker.domain.Expansion;
+import net.maurerit.mtg.deck.Deck;
 import net.maurerit.mtg.deck.DeckImporter;
 import net.maurerit.mtg.deck.DeckImporterFactory;
 import net.maurerit.mtg.deck.impl.MageFileDeckSaver;
 import net.maurerit.mtg.deck.impl.MtgVaultDeckImporter;
 
 import org.junit.Test;
-import org.mage.shared.xmldb.Card;
-import org.mage.shared.xmldb.Deck;
 
 /**
  * Runs tests to test the {@link MtgVaultDeckImporter}.
@@ -52,23 +54,35 @@ public class MtgVaultDeckImporterTest
 		
 		deck.setName("DeckName");
 		
-		Card forest = new Card();
-		forest.setCardNumber(249);
-		forest.setName("Forest");
-		forest.setExpansionSetCode("ZEN");
+		CardEdition forest = new CardEdition();
+		Card innerForest = new Card();
+		forest.setCardNumber("249");
+		forest.setCard(innerForest);
+		innerForest.setName("Forest");
+		Expansion expansion = new Expansion();
+		expansion.setCode("ZEN");
+		forest.setExpansion(expansion);
 		deck.getMainBoardCards().add(forest);
 		
-		Card copperhorn = new Card();
-		copperhorn.setCardNumber(116);
-		copperhorn.setName("Copperhorn Scout");
-		copperhorn.setExpansionSetCode("SOM");
+		CardEdition copperhorn = new CardEdition();
+		Card innerCard = new Card();
+		copperhorn.setCardNumber("116");
+		copperhorn.setCard(innerCard);
+		innerCard.setName("Copperhorn Scout");
+		expansion = new Expansion();
+		expansion.setCode("SOM");
+		copperhorn.setExpansion(expansion);
 		deck.getMainBoardCards().add(copperhorn);
 		deck.getSideBoardCards().add(copperhorn);
 		
-		Card blah = new Card();
-		blah.setCardNumber(223);
-		blah.setName("Blah");
-		blah.setExpansionSetCode("TMP");
+		CardEdition blah = new CardEdition();
+		Card innerBlah = new Card();
+		blah.setCardNumber("223");
+		blah.setCard(innerBlah);
+		innerBlah.setName("Blah");
+		expansion = new Expansion();
+		expansion.setCode("TMP");
+		blah.setExpansion(expansion);
 		deck.getSideBoardCards().add(blah);
 		
 		MageFileDeckSaver saver = new MageFileDeckSaver();
